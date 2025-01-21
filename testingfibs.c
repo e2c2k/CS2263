@@ -1,8 +1,10 @@
 #include <stdio.h> 
 #include <stdlib.h>
-
+#include "isFib.c"
 int main() {
-    int num = 57; 
+    printf("Enter an Integer: ");
+    int num;
+    scanf("%d",&num);
     if (isFib(num)) {
         printf("%d is a Fibonacci number.\n", num);
     } else {
