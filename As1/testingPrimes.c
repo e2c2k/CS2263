@@ -5,9 +5,6 @@ int main(int argc, char* argv[]){
     printf("Enter an Integer: ");
     int n;
     scanf("%d",&n);
-   
-    
-
     
     if (isPrime(n)==1){
         printf("%d is a prime number\n",n);
