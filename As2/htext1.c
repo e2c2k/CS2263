@@ -37,3 +37,13 @@ int main(int argc, char * argv[]){
 	fclose(inFile);
 	return EXIT_SUCCESS;
 }
+
+/*
+Description:
+The program takes in a file, assigned to inFile by argv[1]. This program only reads from it.
+The program has 3 varables, curr, insideTag, and dnp. 
+curr is the character we're currently at.
+insideTag identifies if we're inside the tag paramiters or not, 1 if we are, 0 if we aren't.
+dnp is used to allocate new lines as spaces to make the format of the result a bit more clear.
+by using a do while loop, this allows us to check all of the characters without exception.
+*/
