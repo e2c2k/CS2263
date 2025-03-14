@@ -1,6 +1,6 @@
 #include "Board.h"
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
 Board * createBoard(){
 Board *board = (Board*)malloc(sizeof(Board)); // allocate board
