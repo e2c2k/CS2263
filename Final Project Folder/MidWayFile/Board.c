@@ -25,9 +25,6 @@ void initializeBoard(Board *board){
             else{
                 board->tiles[i][j] = ' ';  // Empty space
             } 
-            else{
-                board->tiles[i][j] = ' ';  // Empty space
-            }
         }
     }
 }
