@@ -35,9 +35,9 @@ void printBoard(Board *board){
     for (int i = 0; i < BOARD_SIZE; i++) {
         printf("%c ", val + i); //printing first values following format A1 for example.
         for (int j = 0; j < BOARD_SIZE; j++) {
-            printf("%c ", board->tiles[i][j]); // printing the X and O's on the  board
+            printf("| %c |", board->tiles[i][j]); // printing the X and O's on the  board
         }
-     printf("\n");
+     printf("\n----------------------\n");
     }
     printf("\n");
 }
