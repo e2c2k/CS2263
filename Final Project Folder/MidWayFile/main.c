@@ -52,15 +52,15 @@ int main(int argc, char ** argv[]){
                     
                     while(valid){
                         printf("Select the row of the piece to move: ");
-                        scanf(" %d", sr);
+                        scanf(" %d", &sr);
                         printf("Select the column of the piece to move: ");
-                        scanf(" %d", sc);
+                        scanf(" %d", &sc);
                         if(board->tiles[sr][sc] == 'x' || board->tiles[sr][sc] == 'o'){
                             printf("\nMovement choices:\n");
                             printf("1. Diagonal right\n");
                             printf("2. Diagonal left\n");
                             printf("Your choice: ");
-                            scanf(" %d", pChoice);
+                            scanf(" %d", &pChoice);
                             switch(pChoice){
                                 case 1:
                                     if(board->tiles[sr][sc] == 'o'){
