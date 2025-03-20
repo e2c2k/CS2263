@@ -3,7 +3,8 @@
 #include <stdlib.h>
 
 Board * createBoard(){
-Board **board = (Board*)malloc(sizeof(Board)); // allocate board
+    Board *board;
+    board = (Board*)malloc(sizeof(Board)); // allocate board
     board->tiles = (char**)malloc(BOARD_SIZE * sizeof(char*)); // allocate array
     for (int i = 0; i < BOARD_SIZE; i++) {
         board->tiles[i] = (char*)malloc(BOARD_SIZE * sizeof(char)); // allocate each row
