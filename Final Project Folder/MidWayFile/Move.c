@@ -37,7 +37,7 @@ bool UpLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter){
 }
 //Moves piece down and right
 bool DownRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){
-if((sc + 1 < BOARD_SiZE) && (sr + 1 < BOARD_SIZE)){
+if((sc + 1 < BOARD_SIZE) && (sr + 1 < BOARD_SIZE)){
     board[sr][sc] = board[sr +1][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
