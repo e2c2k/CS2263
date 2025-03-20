@@ -8,15 +8,15 @@ boolean UpRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){ // 
     board[sr][sc] = board[sr -1][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return true;
+      return false;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return true;
+      return false;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return false;
+  return true;
 }
 //Moves piece up and left 
 boolean UpLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter){
@@ -24,15 +24,15 @@ boolean UpLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter){
     board[sr][sc] = board[sr -1][sc -1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return true;
+      return false;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return true;
+      return false;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return false;
+  return true;
 }
 //Moves piece down and right
 boolean DownRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){
@@ -40,15 +40,15 @@ if((sc + 1 < BOARD_SiZE) && (sr + 1 < BOARD_SIZE)){
     board[sr][sc] = board[sr +1][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return true;
+      return false;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return true;
+      return false;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return false;
+  return true;
 }
 //moves down and left
 int DownLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter){
@@ -56,15 +56,15 @@ if((sc + 1 < BOARD_SIZE) && (sr - 1 <= 0)){
     board[sr][sc] = board[sr -1][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return true;
+      return false;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return true;
+      return false;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return false;
+  return true;
 }
 
 //FOR CROWNED PIECES!!
@@ -73,15 +73,15 @@ if(sc - 1 >= 0){
     board[sr][sc] = board[sr][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return true;
+      return false;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return true;
+      return false;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return false;
+  return true;
 }
 //Moves piece up and left 
 boolean Down(Board *board, int sr, int sc, int *xCounter, int *oCounter){
@@ -89,15 +89,15 @@ if(sc + 1 < BOARD_SIZE){
     board[sr][sc] = board[sr][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return true;
+      return false;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return true;
+      return false;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return false;
+  return true;
 }
 //Moves piece down and right
 boolean Left(Board *board, int sr, int sc, int *xCounter, int *oCounter){
@@ -105,15 +105,15 @@ if(sr - 1 >= 0){
     board[sr][sc] = board[sr -1][sc];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return true;
+      return false;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return true;
+      return false;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return false;
+  return true;
 }
 //moves down and left
 boolean Right(Board *board, int sr, int sc, int *xCounter, int *oCounter){
@@ -121,13 +121,13 @@ if(sr + 1 < BOARD_SIZE){
     board[sr][sc] = board[sr +1][sc];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return true;
+      return false;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return true;
+      return false;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return false;
+  return true;
 }
