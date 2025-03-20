@@ -42,7 +42,7 @@ int main(int argc, char ** argv[]){
                         //save to document
                         playing = false;
                     }
-                    printf("player %c make your turn.", player);
+                    printf("player %c make your turn.\n", player);
                     if(player == 'X'){
                         player = 'O';
                     }
@@ -50,15 +50,17 @@ int main(int argc, char ** argv[]){
                         player = 'X';
                     }
                     
-                        while(valid){
-                            printf("Select the row of the piece to move: ");
-                    scanf(" %d", sr);
-                    printf("Select the column of the piece to move: ");
-                    scanf(" %d", sc);
-                    if(board->tiles[sr][sc] == 'x' || board->tiles[sr][sc] == 'o'){
-                        printf("\nMovement choices:\n");
-                        printf("1. Diagonal right\n");
-                        printf("2. Diagonal left\n");
+                    while(valid){
+                        printf("Select the row of the piece to move: ");
+                        scanf(" %d", sr);
+                        printf("Select the column of the piece to move: ");
+                        scanf(" %d", sc);
+                        if(board->tiles[sr][sc] == 'x' || board->tiles[sr][sc] == 'o'){
+                            printf("\nMovement choices:\n");
+                            printf("1. Diagonal right\n");
+                            printf("2. Diagonal left\n");
+                            printf("Your choice: ");
+                            scanf(" %d", pChoice);
                             switch(pChoice){
                                 case 1:
                                     if(board->tiles[sr][sc] == 'o'){
@@ -66,31 +68,31 @@ int main(int argc, char ** argv[]){
                                     }
                                     else{
                                         valid = UpRight(board, sr, sc, &xCounter, &oCounter);
-                                    }
-                                       
-                                break;
-                                case 2:
-                                    if(board->tiles[sr][sc] == 'o'){
-                                        valid = DownLeft(board, sr, sc, &xCounter, &oCounter);
-                                    }
-                                    else{
-                                        valid = UpLeft(board, sr, sc, &xCounter, &oCounter);
-                                    }
-                                break;
-                                default:
-                                    printf("Invalid choice.");
-                                break;
-                            }
-                        }
-                        else if(board->tiles[sr][sc] == 'X' || board->tiles[sr][sc] == 'O'){
-                            printf("\nMovement choices:\n");
-                            printf("1. Up\n");
-                            printf("2. Down\n");
-                            printf("3. Left\n");
-                            printf("4. Right\n");
-                            switch(pChoice){
+                                    }    
+                                    break;
                                 
+                                    case 2:
+                                        if(board->tiles[sr][sc] == 'o'){
+                                            valid = DownLeft(board, sr, sc, &xCounter, &oCounter);
+                                        }
+                                        else{
+                                            valid = UpLeft(board, sr, sc, &xCounter, &oCounter);
+                                        }
+                                    break;
+                                    default:
+                                        printf("Invalid choice.");
+                                    break;
+                                }
                             }
+                            else if(board->tiles[sr][sc] == 'X' || board->tiles[sr][sc] == 'O'){
+                                printf("\nMovement choices:\n");
+                                printf("1. Up\n");
+                                printf("2. Down\n");
+                                printf("3. Left\n");
+                                printf("4. Right\n");
+                                switch(pChoice){
+                                    
+                                }
                     }
                     else{
                         printf("invalid space");
