@@ -61,29 +61,18 @@ int main(int argc, char ** argv[]){
                             switch(pChoice){
                                 case 1:
                                     if(board->tiles[sr][sc] == 'o'){
-                                        move = DownRight(&board, sr, sc, &xCounter, &oCounter);
-                                        if(move == 1){
-                                            valid = false;
-                                        }
+                                        valid = DownRight(&board, sr, sc, &xCounter, &oCounter);
                                     }
                                     else{
-                                        move = UpRight(&board, sr, sc, &xCounter, &oCounter);
-                                        if(move == 1){
-                                            valid = false;
-                                        }
+                                        valid = UpRight(&board, sr, sc, &xCounter, &oCounter);
+                                       
                                 break;
                                 case 2:
                                     if(board->tiles[sr][sc] == 'o'){
-                                        move = DownLeft(&board, sr, sc, &xCounter, &oCounter);
-                                        if(move == 1){
-                                            valid = false;
-                                        }
+                                        valid = DownLeft(&board, sr, sc, &xCounter, &oCounter);
                                     }
                                     else{
-                                        move = UpLeft(&board, sr, sc, &xCounter, &oCounter);
-                                        if(move == 1){
-                                            valid = false;
-                                        }
+                                        valid = UpLeft(&board, sr, sc, &xCounter, &oCounter);
                                     }
                                 break;
                                 default:
