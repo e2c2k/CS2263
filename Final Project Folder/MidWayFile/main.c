@@ -1,8 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include board.c;
-#include move.c;
+#include <stdbool.h>
+#include "board.c";
+#include "move.c";
 #define BOARD_SIZE 8
 int main(int argc, char ** argv[]){
     int choice;
@@ -27,7 +28,7 @@ int main(int argc, char ** argv[]){
                 int sr;
                 int sc;
                 int pChoice;
-                char player = 'X'
+                char player = 'X';
                 int move = 0;
                 boolean valid = true;
                 while(playing){
@@ -44,10 +45,10 @@ int main(int argc, char ** argv[]){
                     }
                     printf("player %c make your turn.");
                     if(player == 'X'){
-                        player = 'O'
+                        player = 'O';
                     }
                     else{
-                        player = 'X'
+                        player = 'X';
                     }
                     
                         while(valid){
@@ -89,6 +90,7 @@ int main(int argc, char ** argv[]){
                         printf("3. Left\n");
                         printf("4. Right\n");
                         switch(pChoice){
+                        }
                     }
                     else{
                         printf("invalid space");
