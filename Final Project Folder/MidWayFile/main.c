@@ -28,6 +28,8 @@ int main(int argc, char ** argv[]){
                 int sc;
                 int pChoice;
                 char player = 'X'
+                int move = 0;
+                boolean valid = true;
                 while(playing){
                     printBoard(board);
                     if(xCounter == 0){
@@ -52,10 +54,51 @@ int main(int argc, char ** argv[]){
                     printf("Select the column of the piece to move: ");
                     scanf("%d", sc);
                     if(board->tiles[sr][sc] == 'x' || board->tiles[sr][sc] == 'o'){
-
+                        printf("\nMovement choices:\n");
+                        printf("1. Diagonal right\n");
+                        printf("2. Diagonal left\n");
+                        while(valid){
+                            switch(pChoice){
+                                case 1:
+                                    if(board->tiles[sr][sc] == 'o'){
+                                        move = DownRight(&board, sr, sc, &xCounter, &oCounter);
+                                        if(move == 1){
+                                            valid = false;
+                                        }
+                                    }
+                                    else{
+                                        move = UpRight(&board, sr, sc, &xCounter, &oCounter);
+                                        if(move == 1){
+                                            valid = false;
+                                        }
+                                break;
+                                case 2:
+                                    if(board->tiles[sr][sc] == 'o'){
+                                        move = DownLeft(&board, sr, sc, &xCounter, &oCounter);
+                                        if(move == 1){
+                                            valid = false;
+                                        }
+                                    }
+                                    else{
+                                        move = UpLeft(&board, sr, sc, &xCounter, &oCounter);
+                                        if(move == 1){
+                                            valid = false;
+                                        }
+                                    }
+                                break;
+                                default:
+                                    printf("Invalid choice.");
+                                break;
+                            }
+                        }
                     }
-                    else if(board->tiles[sr][sc] == 'x' || board->tiles[sr][sc] == 'o'){
-
+                    else if(board->tiles[sr][sc] == 'X' || board->tiles[sr][sc] == 'O'){
+                        printf("\nMovement choices:\n");
+                        printf("1. Up\n");
+                        printf("2. Down\n");
+                        printf("3. Left\n");
+                        printf("4. Right\n");
+                        switch(pChoice){
                     }
                     else{
                         printf("invalid space");
