@@ -22,6 +22,9 @@ void initializeBoard(Board *board){
                 else if(i > 4){ //defining which side of the board(X on the bottom 3 rows)
                     board->tiles[i][j] = 'x';  // Player X
                 }
+                 else{
+                    board->tiles[i][j] = ' ';  // Empty space
+                } 
             }
             else{
                 board->tiles[i][j] = ' ';  // Empty space
@@ -35,7 +38,7 @@ void printBoard(Board *board){
     for (int i = 0; i < BOARD_SIZE; i++) {
         printf("%d |", i); //printing first values following format 11 for example.
         for (int j = 0; j < BOARD_SIZE; j++) {
-            printf(" %c |  ", board->tiles[i][j]); // printing the X and O's on the  board
+            printf(" %c |", board->tiles[i][j]); // printing the X and O's on the  board
         }
      printf("\n------------------------------------------\n");
     }
