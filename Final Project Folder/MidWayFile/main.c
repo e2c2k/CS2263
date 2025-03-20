@@ -20,7 +20,7 @@ int main(int argc, char ** argv[]){
         switch (choice) {
             case 1: // Play the Game
                 Board *board = createBoard();
-                initializeBoard(&board);
+                initializeBoard(board);
                 bool playing = true;
                 int xCounter = 12;
                 int oCounter = 12;
@@ -31,7 +31,7 @@ int main(int argc, char ** argv[]){
                 int move = 0;
                 bool valid = true;
                 while(playing){
-                    printBoard(&board);
+                    printBoard(board);
                     if(xCounter == 0){
                         printf(" O's win!\n");
                         //save to document
