@@ -19,7 +19,7 @@ int main(int argc, char ** argv[]){
 
         switch (choice) {
             case 1: // Play the Game
-                Board *board = createBoard();
+                Board **board = createBoard();
                 initializeBoard(&board);
                 bool playing = true;
                 int xCounter = 12;
@@ -31,7 +31,7 @@ int main(int argc, char ** argv[]){
                 int move = 0;
                 bool valid = true;
                 while(playing){
-                    printBoard(board);
+                    printBoard(&board);
                     if(xCounter == 0){
                         printf(" O's win!\n");
                         //save to document
@@ -82,20 +82,21 @@ int main(int argc, char ** argv[]){
                                 break;
                             }
                         }
-                    }
-                    else if(board->tiles[sr][sc] == 'X' || board->tiles[sr][sc] == 'O'){
-                        printf("\nMovement choices:\n");
-                        printf("1. Up\n");
-                        printf("2. Down\n");
-                        printf("3. Left\n");
-                        printf("4. Right\n");
-                        switch(pChoice){
-                            
-                        }
+                        else if(board->tiles[sr][sc] == 'X' || board->tiles[sr][sc] == 'O'){
+                            printf("\nMovement choices:\n");
+                            printf("1. Up\n");
+                            printf("2. Down\n");
+                            printf("3. Left\n");
+                            printf("4. Right\n");
+                            switch(pChoice){
+                                
+                            }
                     }
                     else{
                         printf("invalid space");
                     }
+                }
+                    
                 }
                 break;
 
