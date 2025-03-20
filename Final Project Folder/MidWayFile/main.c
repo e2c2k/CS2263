@@ -21,6 +21,46 @@ int main(int argc, char ** argv[]){
             case 1: // Play the Game
                 Board board createBoard();
                 initializeBoard(&board);
+                boolean playing = true;
+                int xCounter = 12;
+                int oCounter = 12;
+                int sr;
+                int sc;
+                int pChoice;
+                char player = 'X'
+                while(playing){
+                    printBoard(board);
+                    if(xCounter == 0){
+                        printf(" O's win!\n");
+                        //save to document
+                        playing = false;
+                    }
+                    if(oCounter == 0){
+                        printf("X's win!\n");
+                        //save to document
+                        playing = false;
+                    }
+                    printf("player %c make your turn.");
+                    if(player == 'X'){
+                        player = 'O'
+                    }
+                    else{
+                        player = 'X'
+                    }
+                    printf("Select the row of the piece to move: ");
+                    scanf("%d", sr);
+                    printf("Select the column of the piece to move: ");
+                    scanf("%d", sc);
+                    if(board->tiles[sr][sc] == 'x' || board->tiles[sr][sc] == 'o'){
+
+                    }
+                    else if(board->tiles[sr][sc] == 'x' || board->tiles[sr][sc] == 'o'){
+
+                    }
+                    else{
+                        printf("invalid space");
+                    
+                }
                 break;
 
             case 2: // Display Stats
