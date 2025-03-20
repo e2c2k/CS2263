@@ -4,11 +4,9 @@
 
 Board * createBoard(){
 Board *board = (Board*)malloc(sizeof(Board)); // allocate board
-    board->tiles = (char**)malloc(BOARD_SIZE * sizeof(char*)); // allocate arrays
-    board->trackBoard = (int**)malloc(BOARD_SIZE * sizeof(int*));
+    board->tiles = (char**)malloc(BOARD_SIZE * sizeof(char*)); // allocate array
     for (int i = 0; i < BOARD_SIZE; i++) {
         board->tiles[i] = (char*)malloc(BOARD_SIZE * sizeof(char)); // allocate each row
-        board->trackBoard[i] = (int*)malloc(BOARD_SIZE * sizeof(int));
     }
     return board;
 }
@@ -35,7 +33,7 @@ void printBoard(Board *board){
     printf("\n  0 1 2 3 4 5 6 7\n"); // printing second values following format 11 for example.
     char val = 'A';
     for (int i = 0; i < BOARD_SIZE; i++) {
-        printf("%d ", i); //printing first values following format 11 for example.
+        printf("%c ", val + i); //printing first values following format 11 for example.
         for (int j = 0; j < BOARD_SIZE; j++) {
             printf("| %c |", board->tiles[i][j]); // printing the X and O's on the  board
         }
