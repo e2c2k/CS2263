@@ -80,7 +80,7 @@ int main(int argc, char ** argv[]){
                                         }
                                     break;
                                     default:
-                                        printf("Invalid choice.");
+                                        printf("Invalid choice.\n");
                                     break;
                                 }
                             }
@@ -95,7 +95,7 @@ int main(int argc, char ** argv[]){
                                 }
                     }
                     else{
-                        printf("invalid space");
+                        printf("invalid space\n");
                     }
                 }
                     
