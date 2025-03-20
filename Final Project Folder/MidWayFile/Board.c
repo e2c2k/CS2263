@@ -41,3 +41,6 @@ void printBoard(Board *board){
     }
     printf("\n");
 }
+void freeBoard(Board *board){
+    //GAVIN
+}
