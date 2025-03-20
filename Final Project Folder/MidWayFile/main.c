@@ -19,7 +19,7 @@ int main(int argc, char ** argv[]){
 
         switch (choice) {
             case 1: // Play the Game
-                Board *board = createBoard();
+                Board **board = createBoard();
                 initializeBoard(&board);
                 bool playing = true;
                 int xCounter = 12;
