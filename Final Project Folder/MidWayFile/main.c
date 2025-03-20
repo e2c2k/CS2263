@@ -19,8 +19,8 @@ int main(int argc, char ** argv[]){
 
         switch (choice) {
             case 1: // Play the Game
-                char p1[25];
-                char p2[25];
+                Board board createBoard();
+                initializeBoard(&board);
                 break;
 
             case 2: // Display Stats
