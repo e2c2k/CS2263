@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include board.c;
+#include move.c;
 #define BOARD_SIZE 8
 int main(int argc, char ** argv[]){
     int choice;
@@ -17,7 +19,8 @@ int main(int argc, char ** argv[]){
 
         switch (choice) {
             case 1: // Play the Game
-                // need to find the start method																														
+                char p1[25];
+                char p2[25];
                 break;
 
             case 2: // Display Stats
