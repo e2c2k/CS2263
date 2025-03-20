@@ -3,75 +3,75 @@
 #include <stdlib.h>
 
 // Moves specified peice to the right and up
-void UpRight(Board *board, int sr, int sc){ // sr = start row, sc = start collumn
+int UpRight(Board *board, int sr, int sc){ // sr = start row, sc = start collumn
   if((sc - 1 >= 0) && (sr + 1 < BOARD_SIZE)){
     board[sr][sc] = board[sr -1][sc +1];
-    return;
+    return 1;
   }
   printf("Invalid move, try a differnt move.");
-  return;
+  return 0;
 }
 //Moves piece up and left 
-void UpLeft(Board *board, int sr, int sc){
+int UpLeft(Board *board, int sr, int sc){
   if((sc - 1 >= 0) && (sr - 1 <= 0)){
     board[sr][sc] = board[sr -1][sc -1];
-    return;
+    return 1;
   }
   printf("Invalid move, try a differnt move.");
-  return;
+  return 0;
 }
 //Moves piece down and right
-void DownRight(Board *board, int sr, int sc){
+int DownRight(Board *board, int sr, int sc){
 if((sc + 1 < BOARD_SiZE) && (sr + 1 < BOARD_SIZE)){
     board[sr][sc] = board[sr +1][sc +1];
-    return;
+    return 1;
   }
   printf("Invalid move, try a differnt move.");
-  return;
+  return 0;
 }
 //moves down and left
-void DownLeft(Board *board, int sr, int sc){
+int DownLeft(Board *board, int sr, int sc){
 if((sc + 1 < BOARD_SIZE) && (sr - 1 <= 0)){
     board[sr][sc] = board[sr -1][sc +1];
-    return;
+    return 1;
   }
   printf("Invalid move, try a differnt move.");
-  return;
+  return 0;
 }
 
 //FOR CROWNED PIECES!!
-void Up(Board *board, int sr, int sc){
+int Up(Board *board, int sr, int sc){
 if(sc - 1 >= 0){
     board[sr][sc] = board[sr][sc +1];
-    return;
+    return 1;
   }
   printf("Invalid move, try a differnt move.");
-  return;
+  return 0;
 }
 //Moves piece up and left 
-void Down(Board *board, int sr, int sc){
+int Down(Board *board, int sr, int sc){
 if(sc + 1 < BOARD_SIZE){
     board[sr][sc] = board[sr][sc +1];
-    return;
+    return 1;
   }
   printf("Invalid move, try a differnt move.");
-  return;
+  return 0;
 }
 //Moves piece down and right
-void Left(Board *board, int sr, int sc){
+int Left(Board *board, int sr, int sc){
 if(sr - 1 >= 0){
     board[sr][sc] = board[sr -1][sc];
-    return;
+    return 1;
   }
   printf("Invalid move, try a differnt move.");
-  return;
+  return 0;
 }
 //moves down and left
-void Right(Board *board, int sr, int sc){
+int Right(Board *board, int sr, int sc){
 if(sr + 1 < BOARD_SIZE){
     board[sr][sc] = board[sr +1][sc];
-    return;
+    return 1;
   }
   printf("Invalid move, try a differnt move.");
-  return;
+  return 0;
 }
