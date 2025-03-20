@@ -22,7 +22,7 @@ int main(int argc, char ** argv[]){
             case 1: // Play the Game
                 Board board createBoard();
                 initializeBoard(&board);
-                boolean playing = true;
+                bool playing = true;
                 int xCounter = 12;
                 int oCounter = 12;
                 int sr;
@@ -67,6 +67,7 @@ int main(int argc, char ** argv[]){
                                     }
                                     else{
                                         valid = UpRight(&board, sr, sc, &xCounter, &oCounter);
+                                    }
                                        
                                 break;
                                 case 2:
@@ -90,11 +91,12 @@ int main(int argc, char ** argv[]){
                         printf("3. Left\n");
                         printf("4. Right\n");
                         switch(pChoice){
+                            
                         }
                     }
                     else{
                         printf("invalid space");
-                    
+                    }
                 }
                 break;
 
