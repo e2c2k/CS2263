@@ -30,7 +30,7 @@ int main(int argc, char ** argv[]){
                 int pChoice;
                 char player = 'X';
                 int move = 0;
-                boolean valid = true;
+                bool valid = true;
                 while(playing){
                     printBoard(board);
                     if(xCounter == 0){
