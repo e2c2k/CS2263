@@ -3,52 +3,52 @@
 #include <stdlib.h>
 
 // Moves specified peice to the right and up
-int UpRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){ // sr = start row, sc = start collumn
+boolean UpRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){ // sr = start row, sc = start collumn
   if((sc - 1 >= 0) && (sr + 1 < BOARD_SIZE)){
     board[sr][sc] = board[sr -1][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return 1;
+      return true;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return 1;
+      return true;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return 0;
+  return false;
 }
 //Moves piece up and left 
-int UpLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter){
+boolean UpLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter){
   if((sc - 1 >= 0) && (sr - 1 <= 0)){
     board[sr][sc] = board[sr -1][sc -1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return 1;
+      return true;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return 1;
+      return true;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return 0;
+  return false;
 }
 //Moves piece down and right
-int DownRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){
+boolean DownRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){
 if((sc + 1 < BOARD_SiZE) && (sr + 1 < BOARD_SIZE)){
     board[sr][sc] = board[sr +1][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return 1;
+      return true;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return 1;
+      return true;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return 0;
+  return false;
 }
 //moves down and left
 int DownLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter){
@@ -56,78 +56,78 @@ if((sc + 1 < BOARD_SIZE) && (sr - 1 <= 0)){
     board[sr][sc] = board[sr -1][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return 1;
+      return true;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return 1;
+      return true;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return 0;
+  return false;
 }
 
 //FOR CROWNED PIECES!!
-int Up(Board *board, int sr, int sc, int *xCounter, int *oCounter){
+boolean Up(Board *board, int sr, int sc, int *xCounter, int *oCounter){
 if(sc - 1 >= 0){
     board[sr][sc] = board[sr][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return 1;
+      return true;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return 1;
+      return true;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return 0;
+  return false;
 }
 //Moves piece up and left 
-int Down(Board *board, int sr, int sc, int *xCounter, int *oCounter){
+boolean Down(Board *board, int sr, int sc, int *xCounter, int *oCounter){
 if(sc + 1 < BOARD_SIZE){
     board[sr][sc] = board[sr][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return 1;
+      return true;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return 1;
+      return true;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return 0;
+  return false;
 }
 //Moves piece down and right
-int Left(Board *board, int sr, int sc, int *xCounter, int *oCounter){
+boolean Left(Board *board, int sr, int sc, int *xCounter, int *oCounter){
 if(sr - 1 >= 0){
     board[sr][sc] = board[sr -1][sc];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return 1;
+      return true;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return 1;
+      return true;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return 0;
+  return false;
 }
 //moves down and left
-int Right(Board *board, int sr, int sc, int *xCounter, int *oCounter){
+boolean Right(Board *board, int sr, int sc, int *xCounter, int *oCounter){
 if(sr + 1 < BOARD_SIZE){
     board[sr][sc] = board[sr +1][sc];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
-      return 1;
+      return true;
     }
     if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
-      return 1;
+      return true;
     }
   }
   printf("Invalid move, try a differnt move.");
-  return 0;
+  return false;
 }
