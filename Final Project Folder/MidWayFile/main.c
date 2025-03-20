@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include "board.c";
-#include "move.c";
+#include "Board.c"
+#include "Move.c"
 #define BOARD_SIZE 8
 int main(int argc, char ** argv[]){
     int choice;
