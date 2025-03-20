@@ -49,7 +49,9 @@ int main(int argc, char ** argv[]){
                     else{
                         player = 'X'
                     }
-                    printf("Select the row of the piece to move: ");
+                    
+                        while(valid){
+                            printf("Select the row of the piece to move: ");
                     scanf("%d", sr);
                     printf("Select the column of the piece to move: ");
                     scanf("%d", sc);
@@ -57,7 +59,6 @@ int main(int argc, char ** argv[]){
                         printf("\nMovement choices:\n");
                         printf("1. Diagonal right\n");
                         printf("2. Diagonal left\n");
-                        while(valid){
                             switch(pChoice){
                                 case 1:
                                     if(board->tiles[sr][sc] == 'o'){
