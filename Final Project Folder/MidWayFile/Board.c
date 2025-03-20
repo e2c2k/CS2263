@@ -12,7 +12,7 @@ Board * createBoard(){
     return board;
 }
 
-void initializeBoard(Board **board){
+void initializeBoard(Board *board){
   for(int i = 0; i < BOARD_SIZE; i++){ //row
         for(int j = 0; j < BOARD_SIZE; j++){ //col
             if((i + j) % 2 == 1){ //for each odd space
@@ -30,7 +30,7 @@ void initializeBoard(Board **board){
     }
 }
 
-void printBoard(Board **board){
+void printBoard(Board *board){
     printf("\n  0 1 2 3 4 5 6 7\n"); // printing second values following format 11 for example.
     char val = 'A';
     for (int i = 0; i < BOARD_SIZE; i++) {
@@ -42,6 +42,6 @@ void printBoard(Board **board){
     }
     printf("\n");
 }
-void freeBoard(Board **board){
+void freeBoard(Board *board){
     //GAVIN
 }
