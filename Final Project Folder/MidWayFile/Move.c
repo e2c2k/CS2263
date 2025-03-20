@@ -6,11 +6,11 @@
 int UpRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){ // sr = start row, sc = start collumn
   if((sc - 1 >= 0) && (sr + 1 < BOARD_SIZE)){
     board[sr][sc] = board[sr -1][sc +1];
-    if(board[sr][sc] == 'x'){
+    if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
       return 1;
     }
-    if(board[sr][sc] == 'o'){
+    if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
       return 1;
     }
@@ -22,11 +22,11 @@ int UpRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){ // sr =
 int UpLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter){
   if((sc - 1 >= 0) && (sr - 1 <= 0)){
     board[sr][sc] = board[sr -1][sc -1];
-    if(board[sr][sc] == 'x'){
+    if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
       return 1;
     }
-    if(board[sr][sc] == 'o'){
+    if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
       return 1;
     }
@@ -38,11 +38,11 @@ int UpLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter){
 int DownRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){
 if((sc + 1 < BOARD_SiZE) && (sr + 1 < BOARD_SIZE)){
     board[sr][sc] = board[sr +1][sc +1];
-    if(board[sr][sc] == 'x'){
+    if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
       return 1;
     }
-    if(board[sr][sc] == 'o'){
+    if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
       return 1;
     }
@@ -54,11 +54,11 @@ if((sc + 1 < BOARD_SiZE) && (sr + 1 < BOARD_SIZE)){
 int DownLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter){
 if((sc + 1 < BOARD_SIZE) && (sr - 1 <= 0)){
     board[sr][sc] = board[sr -1][sc +1];
-    if(board[sr][sc] == 'x'){
+    if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
       return 1;
     }
-    if(board[sr][sc] == 'o'){
+    if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
       return 1;
     }
@@ -71,11 +71,11 @@ if((sc + 1 < BOARD_SIZE) && (sr - 1 <= 0)){
 int Up(Board *board, int sr, int sc, int *xCounter, int *oCounter){
 if(sc - 1 >= 0){
     board[sr][sc] = board[sr][sc +1];
-    if(board[sr][sc] == 'x'){
+    if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
       return 1;
     }
-    if(board[sr][sc] == 'o'){
+    if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
       return 1;
     }
@@ -87,11 +87,11 @@ if(sc - 1 >= 0){
 int Down(Board *board, int sr, int sc, int *xCounter, int *oCounter){
 if(sc + 1 < BOARD_SIZE){
     board[sr][sc] = board[sr][sc +1];
-    if(board[sr][sc] == 'x'){
+    if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
       return 1;
     }
-    if(board[sr][sc] == 'o'){
+    if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
       return 1;
     }
@@ -103,11 +103,11 @@ if(sc + 1 < BOARD_SIZE){
 int Left(Board *board, int sr, int sc, int *xCounter, int *oCounter){
 if(sr - 1 >= 0){
     board[sr][sc] = board[sr -1][sc];
-    if(board[sr][sc] == 'x'){
+    if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
       return 1;
     }
-    if(board[sr][sc] == 'o'){
+    if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
       return 1;
     }
@@ -119,11 +119,11 @@ if(sr - 1 >= 0){
 int Right(Board *board, int sr, int sc, int *xCounter, int *oCounter){
 if(sr + 1 < BOARD_SIZE){
     board[sr][sc] = board[sr +1][sc];
-    if(board[sr][sc] == 'x'){
+    if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
       xCounter--;
       return 1;
     }
-    if(board[sr][sc] == 'o'){
+    if(board[sr][sc] == 'o' || board[sr][sc] == 'O'){
       oCounter--;
       return 1;
     }
