@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 // Moves specified peice to the right and up
-bool UpRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){ // sr = start row, sc = start collumn
+bool UpRight(Board **board, int sr, int sc, int *xCounter, int *oCounter){ // sr = start row, sc = start collumn
   if((sc - 1 >= 0) && (sr + 1 < BOARD_SIZE)){
     board[sr][sc] = board[sr -1][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
@@ -20,7 +20,7 @@ bool UpRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){ // sr 
   return true;
 }
 //Moves piece up and left 
-bool UpLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter){
+bool UpLeft(Board **board, int sr, int sc, int *xCounter, int *oCounter){
   if((sc - 1 >= 0) && (sr - 1 <= 0)){
     board[sr][sc] = board[sr -1][sc -1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
@@ -36,7 +36,7 @@ bool UpLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter){
   return true;
 }
 //Moves piece down and right
-bool DownRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){
+bool DownRight(Board **board, int sr, int sc, int *xCounter, int *oCounter){
 if((sc + 1 < BOARD_SIZE) && (sr + 1 < BOARD_SIZE)){
     board[sr][sc] = board[sr +1][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
@@ -52,7 +52,7 @@ if((sc + 1 < BOARD_SIZE) && (sr + 1 < BOARD_SIZE)){
   return true;
 }
 //moves down and left
-bool DownLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter){
+bool DownLeft(Board **board, int sr, int sc, int *xCounter, int *oCounter){
 if((sc + 1 < BOARD_SIZE) && (sr - 1 <= 0)){
     board[sr][sc] = board[sr -1][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
@@ -69,7 +69,7 @@ if((sc + 1 < BOARD_SIZE) && (sr - 1 <= 0)){
 }
 
 //FOR CROWNED PIECES!!
-bool Up(Board *board, int sr, int sc, int *xCounter, int *oCounter){
+bool Up(Board **board, int sr, int sc, int *xCounter, int *oCounter){
 if(sc - 1 >= 0){
     board[sr][sc] = board[sr][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
@@ -85,7 +85,7 @@ if(sc - 1 >= 0){
   return true;
 }
 //Moves piece up and left 
-bool Down(Board *board, int sr, int sc, int *xCounter, int *oCounter){
+bool Down(Board **board, int sr, int sc, int *xCounter, int *oCounter){
 if(sc + 1 < BOARD_SIZE){
     board[sr][sc] = board[sr][sc +1];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
@@ -101,7 +101,7 @@ if(sc + 1 < BOARD_SIZE){
   return true;
 }
 //Moves piece down and right
-bool Left(Board *board, int sr, int sc, int *xCounter, int *oCounter){
+bool Left(Board **board, int sr, int sc, int *xCounter, int *oCounter){
 if(sr - 1 >= 0){
     board[sr][sc] = board[sr -1][sc];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
@@ -117,7 +117,7 @@ if(sr - 1 >= 0){
   return true;
 }
 //moves down and left
-bool Right(Board *board, int sr, int sc, int *xCounter, int *oCounter){
+bool Right(Board **board, int sr, int sc, int *xCounter, int *oCounter){
 if(sr + 1 < BOARD_SIZE){
     board[sr][sc] = board[sr +1][sc];
     if(board[sr][sc] == 'x' || board[sr][sc] == 'X'){
