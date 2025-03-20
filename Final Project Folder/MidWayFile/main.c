@@ -49,7 +49,7 @@ int main(int argc, char ** argv[]){
                     else{
                         player = 'X';
                     }
-                    
+                    valid = false;
                     while(valid){
                         printf("Select the row of the piece to move: ");
                         scanf(" %d", &sr);
