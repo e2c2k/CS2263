@@ -42,7 +42,7 @@ int main(int argc, char ** argv[]){
                         //save to document
                         playing = false;
                     }
-                    printf("player %c make your turn.");
+                    printf("player %c make your turn.", player);
                     if(player == 'X'){
                         player = 'O';
                     }
@@ -52,9 +52,9 @@ int main(int argc, char ** argv[]){
                     
                         while(valid){
                             printf("Select the row of the piece to move: ");
-                    scanf("%d", sr);
+                    scanf(" %d", sr);
                     printf("Select the column of the piece to move: ");
-                    scanf("%d", sc);
+                    scanf(" %d", sc);
                     if(board->tiles[sr][sc] == 'x' || board->tiles[sr][sc] == 'o'){
                         printf("\nMovement choices:\n");
                         printf("1. Diagonal right\n");
