@@ -104,8 +104,28 @@ void listDirectory(Directory* dir, int depth){
 void searchTree(Directory* dir,char* target){
 
 }
-void freeDirectory(Directory* dir){
-//i give up - -
-//          ---
-//         /   \'  
+void freeDirectory(Directory* dir) {
+    if (dir == NULL) {
+        printf("not a directory\n");
+        return;
+    }
+
+    File* currentFile = dir->files;
+    while (currentFile != NULL) {
+        File* nextFile = currentFile->nextFile;
+        free(currentFile->name); //frees all the files in the directory that are linked together 
+        free(currentFile); 
+        currentFile = nextFile;
+    }
+
+    Directory* currentSub = dir->children;
+    while (currentSub != NULL) {
+        Directory* nextChild = currentSub->nextDir; 
+        freeDirectory(currentSub); // should recursivly free all sub directories
+        currentSub = nextChild;
+    }
+
+    // frees the actual directory at the end of recursive before unwind :) groot is last 
+    free(dir->name);
+    free(dir);
 }
