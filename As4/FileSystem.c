@@ -102,7 +102,24 @@ void listDirectory(Directory* dir, int depth){
     }
 }
 void searchTree(Directory* dir,char* target){
+	if (!dir){
+		printf("Target: %s Not found.", target);
+		return;
+	}
 
+	File* file = dir->files;
+	printf("Directory:  %s \n", dir->name);
+	while(file){
+		printf(" File: %s\n", file->name);
+		if (strcmp(file->name, target) == 0) return;
+	}
+	printf(" File not found in directory: %s\n", dir->name);
+	if (dir -> children == NULL){
+		printf("Target: %s Not found. \n", target);
+		return;
+	}
+	Directory* child = dir->children;
+	searchTree(child, target);
 }
 void freeDirectory(Directory* dir) {
     if (dir == NULL) {
