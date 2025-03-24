@@ -7,8 +7,8 @@
 #define RESET     "\x1b[0m"   // Reset colors
 
 // ANSI for checkers pieces
-#define RED_PIECE  "\x1b[31mo\x1b[0m"  // Red piece (Player O)
-#define BLACK_PIECE "\x1b[37mx\x1b[0m"  // White text on black background (Player X)
+#define RED_PIECE  "\x1b[31mo\x1b[0m"  //Red piece (Player O)
+#define BLACK_PIECE "\x1b[37mx\x1b[0m"  //White text on black background (Player X)
 
 
 
@@ -72,5 +72,6 @@ void printBoard(Board *board) {
     }
 }
 void freeBoard(Board *board){
-    //GAVIN
+    free(board->tiles);
+    free(board);
 }
