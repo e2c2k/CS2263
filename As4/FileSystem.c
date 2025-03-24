@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "FileSystem.h"
+//
+/**
+@Author Brayden Lavigne 
+@author Mike Drost
+	*/
 // yes i named it Groot on purpose
 Directory* createGroot(){
     Directory* newDir = malloc(sizeof(Directory));
