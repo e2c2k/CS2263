@@ -47,6 +47,9 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
                 return true; // Successfully jumped
             }
         }
+      else{
+          board = board[next_r][next_c];
+      }
     }
     return false; // No valid move
 }
