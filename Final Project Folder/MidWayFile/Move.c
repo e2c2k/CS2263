@@ -4,7 +4,7 @@
 #include <stdbool.h>
 //sr to move row down is + 1, move up is -1
 //sc to move column right is +1, move left is -1
-bool jump(char **board, int sr, int sc, int *xCounter, int *oCounter, char player) {
+bool jump(char **board, int sr, int sc, int *xCounter, int *oCounter, char player, int movement) { //movement: 1; upRight. 2; downRight. 3; upLeft. 4; downLeft
     // Define opponent's piece
     char opponent_piece1 = (player == 'x') ? 'o' : 'x'; // Opponent’s normal piece
     char opponent_piece2 = (player == 'x') ? 'O' : 'X'; // Opponent’s king piece
@@ -12,9 +12,28 @@ bool jump(char **board, int sr, int sc, int *xCounter, int *oCounter, char playe
     // Check if there is an opponent's piece at (sr, sc)
     if (board[sr][sc] == opponent_piece1 || board[sr][sc] == opponent_piece2) {
         // Find the landing spot
-        int new_r = (player == 'o') ? sr - 1 : sr + 1; // 'o' moves up, 'x' moves down
-        int new_c = (sc > 0) ? sc - 1 : sc + 1;        // Left or right
-
+        int new_r;
+        int new_c;
+        switch(movement){
+            case 1:
+                new_r = sr-1;
+                new_c = sc+1;
+                break;
+            case 2:
+                new_r = sr+1;
+                new_c = sc+1;
+                break;
+            case 3:
+                new_r = sr-1;
+                new_c = sc-1;
+                break;
+            case 4:
+                new_r = sr+1;
+                new_c = sc-1;
+                break;
+            default:
+                printf("invalid move type\n");
+                break;
         // Ensure the landing spot is within the board and is empty
         if (new_r >= 0 && new_r < BOARD_SIZE && new_c >= 0 && new_c < BOARD_SIZE &&
             board[new_r][new_c] == ' ') {
@@ -31,9 +50,9 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
         int next_r = sr - 1; // Move row up
         int next_c = sc + 1; // Move left
         printf("Movement P1\n");
-        if (jump(board, next_r, next_c, xCounter, oCounter, player) == true) {
-            int landing_r = next_r - 2; // Landing position
-            int landing_c = next_c + 2;
+        if (jump(board, next_r, next_c, xCounter, oCounter, player, 1) == true) {
+            int landing_r = next_r - 1; // Landing position
+            int landing_c = next_c + 1;
             printf("Movement P2\n");
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
                 board[landing_r][landing_c] = player; // Move player to new position
@@ -61,9 +80,9 @@ bool UpLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char pla
         int next_r = sr - 1; // Move row up
         int next_c = sc - 1; // Move left
         printf("Movement P1\n");
-        if (jump(board, next_r, next_c, xCounter, oCounter, player) == true) {
-            int landing_r = next_r - 2; // Landing position
-            int landing_c = next_c - 2;
+        if (jump(board, next_r, next_c, xCounter, oCounter, player, 3) == true) {
+            int landing_r = next_r - 1; // Landing position
+            int landing_c = next_c - 1;
             printf("Movement P2\n");
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
                 board[landing_r][landing_c] = player; // Move player to new position
@@ -92,9 +111,9 @@ bool DownRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char 
         int next_r = sr + 1; // Move row down
         int next_c = sc + 1; // Move right
         printf("Movement P1\n");
-        if (jump(board, next_r, next_c, xCounter, oCounter, player) == true) {
-            int landing_r = next_r + 2; // Landing position
-            int landing_c = next_c + 2;
+        if (jump(board, next_r, next_c, xCounter, oCounter, player, 2) == true) {
+            int landing_r = next_r + 1; // Landing position
+            int landing_c = next_c + 1;
             printf("Movement P2\n");
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
                 board[landing_r][landing_c] = player; // Move player to new position
@@ -124,9 +143,9 @@ bool DownLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char p
         int next_r = sr + 1; // Move row down
         int next_c = sc - 1; // Move left
         printf("Movement P1\n");
-        if (jump(board, next_r, next_c, xCounter, oCounter, player)  == true) {
-            int landing_r = next_r + 2; // Landing position
-            int landing_c = next_c - 2;
+        if (jump(board, next_r, next_c, xCounter, oCounter, player, 4)  == true) {
+            int landing_r = next_r + 1; // Landing position
+            int landing_c = next_c - 1;
             printf("Movement P2\n");
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
                 board[landing_r][landing_c] = player; // Move player to new position
