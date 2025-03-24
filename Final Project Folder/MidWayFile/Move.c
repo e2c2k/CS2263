@@ -73,7 +73,7 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
           return true;
       }
     }
-    printf("\ninvalid move\n");
+    printf("invalid move\n");
     return false; // No valid move
 }
 //Moves piece up and left 
@@ -104,7 +104,7 @@ bool UpLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char pla
           return true;
       }
     }
-    printf("\ninvalid move\n");
+    printf("invalid move\n");
     return false; // No valid move
 }
 //Moves piece down and right
@@ -136,7 +136,7 @@ bool DownRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char 
           return true;
       }
     }
-    printf("\ninvalid move\n");
+    printf("invalid move\n");
     return false; // No valid move
 }
 
@@ -169,7 +169,7 @@ bool DownLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char p
           return true;
       }
     }
-    printf("\ninvalid move\n");
+    printf("invalid move\n");
     return false; // No valid move
 }
 
