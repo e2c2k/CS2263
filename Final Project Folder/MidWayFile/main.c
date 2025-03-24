@@ -67,16 +67,16 @@ int main(int argc, char ** argv[]){
                                         valid = UpRight(*board->tiles, sr, sc, &xCounter, &oCounter, player);
                                     }
                                     else{
-                                        valid = DownRight(board, sr, sc, &xCounter, &oCounter, player);
+                                        valid = DownRight(*board->tiles, sr, sc, &xCounter, &oCounter, player);
                                     }    
                                     break;
                                 
                                     case 2:
                                         if(board->tiles[sr][sc] == 'o'){
-                                            valid = UpLeft(board, sr, sc, &xCounter, &oCounter, player);
+                                            valid = UpLeft(*board->tiles, sr, sc, &xCounter, &oCounter, player);
                                         }
                                         else{
-                                            valid = DownLeft(board, sr, sc, &xCounter, &oCounter, player);
+                                            valid = DownLeft(*board->tiles, sr, sc, &xCounter, &oCounter, player);
                                         }
                                     break;
                                     default:
