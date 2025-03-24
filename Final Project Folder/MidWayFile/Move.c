@@ -18,6 +18,7 @@ bool jump(Board *board, int sr, int sc, int *xCounter, int *oCounter, char playe
         // Ensure the landing spot is within the board and is empty
         if (new_r >= 0 && new_r < BOARD_SIZE && new_c >= 0 && new_c < BOARD_SIZE &&
             board->tiles[new_r][new_c] == ' ') {
+            printf("Jump reached\n");
             return true; // Valid jump
         }
     }
@@ -42,7 +43,7 @@ bool UpRight(Board *board, int sr, int sc, int *xCounter, int *oCounter, char pl
                 // Decrease opponent's counter
                 if (player == 'o') (*xCounter)--;
                 else (*oCounter)--;
-
+                printf("Movement done\n");
                 return true; // Successfully jumped
             }
         }
@@ -67,7 +68,7 @@ bool UpLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter, char pla
                 // Decrease opponent's counter
                 if (player == 'o') (*xCounter)--;
                 else (*oCounter)--;
-
+                printf("Movement done\n");
                 return true; // Successfully jumped
             }
         }
@@ -93,7 +94,7 @@ bool DownRight(Board *board, int sr, int sc, int *xCounter, int *oCounter, char 
                 // Decrease opponent's counter
                 if (player == 'o') (*xCounter)--;
                 else (*oCounter)--;
-
+                printf("Movement done\n");
                 return true; // Successfully jumped
             }
         }
@@ -120,7 +121,7 @@ bool DownLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter, char p
                 // Decrease opponent's counter
                 if (player == 'o') (*xCounter)--;
                 else (*oCounter)--;
-
+                printf("Movement done\n");
                 return true; // Successfully jumped
             }
         }
