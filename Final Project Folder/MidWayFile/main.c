@@ -43,13 +43,6 @@ int main(int argc, char ** argv[]){
                         playing = false;
                     }
                     printf("player %c make your turn.\n", player);
-                    if(player == 'x'){
-                        player = 'o';
-                    }
-                    else{
-                        player = 'x';
-                    }
-                    valid = false;
                     while(!valid){
                         printf("Select the row of the piece to move: ");
                         scanf(" %d", &sr);
@@ -98,6 +91,13 @@ int main(int argc, char ** argv[]){
                         printf("invalid space\n");
                     }
                 }
+                if(player == 'x'){
+                        player = 'o';
+                    }
+                    else{
+                        player = 'x';
+                    }
+                    valid = false;
                     
                 }
                 break;
