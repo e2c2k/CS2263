@@ -64,19 +64,19 @@ int main(int argc, char ** argv[]){
                             switch(pChoice){
                                 case 1:
                                     if(board->tiles[sr][sc] == 'x'){
-                                        valid = UpRight(&board->tiles, sr, sc, &xCounter, &oCounter, player);
+                                        valid = UpRight(board->tiles, sr, sc, &xCounter, &oCounter, player);
                                     }
                                     else{
-                                        valid = DownRight(&board->tiles, sr, sc, &xCounter, &oCounter, player);
+                                        valid = DownRight(board->tiles, sr, sc, &xCounter, &oCounter, player);
                                     }    
                                     break;
                                 
                                     case 2:
                                         if(board->tiles[sr][sc] == 'x'){
-                                            valid = UpLeft(&board->tiles, sr, sc, &xCounter, &oCounter, player);
+                                            valid = UpLeft(board->tiles, sr, sc, &xCounter, &oCounter, player);
                                         }
                                         else{
-                                            valid = DownLeft(&board->tiles, sr, sc, &xCounter, &oCounter, player);
+                                            valid = DownLeft(board->tiles, sr, sc, &xCounter, &oCounter, player);
                                         }
                                     break;
                                     default:
