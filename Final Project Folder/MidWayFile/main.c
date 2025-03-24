@@ -29,7 +29,7 @@ int main(int argc, char ** argv[]){
                 int pChoice;
                 char player = 'X';
                 int move = 0;
-                bool valid = true;
+                bool valid = false;
                 while(playing){
                     printBoard(board);
                     if(xCounter == 0){
@@ -49,8 +49,8 @@ int main(int argc, char ** argv[]){
                     else{
                         player = 'X';
                     }
-                    valid = true;
-                    while(valid){
+                    valid = false;
+                    while(!valid){
                         printf("Select the row of the piece to move: ");
                         scanf(" %d", &sr);
                         printf("Select the column of the piece to move: ");
