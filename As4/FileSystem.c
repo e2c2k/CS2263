@@ -114,13 +114,13 @@ void searchTree(Directory* dir,char* target){
 	if(strcmp(dir->name, "root") == 0) printf("Directory: %s/", dir->name);
 	printf("%s/", dir->name);
 	if(strcmp(dir->name, target) == 0){ // looking for a directory scowering.
-		printf("Found directory:  %s \n", dir->name);
+		printf("\nFound directory:  %s \n", dir->name);
 		return;
 	}
 	File* file = dir->files; // make a file structure for the directory to search files in directory WOWOWOWOW
 	while(file && file != NULL){ // check all files in directory. Had to add the second check to fix infinite loop
 		if (strcmp(file->name, target) == 0){ // compare
-			printf(" Found file: %s\n", file->name);
+			printf("\nFound file: %s\n", file->name);
 			return;
 		}
 		file = file->nextFile; // moving to next file in directory
