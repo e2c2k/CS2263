@@ -63,7 +63,7 @@ int main(int argc, char ** argv[]){
                             scanf(" %d", &pChoice);
                             switch(pChoice){
                                 case 1:
-                                    if(board->tiles[sr][sc] == 'o'){
+                                    if(board->tiles[sr][sc] == 'x'){
                                         valid = UpRight(&board, sr, sc, &xCounter, &oCounter, player);
                                     }
                                     else{
@@ -72,7 +72,7 @@ int main(int argc, char ** argv[]){
                                     break;
                                 
                                     case 2:
-                                        if(board->tiles[sr][sc] == 'o'){
+                                        if(board->tiles[sr][sc] == 'x'){
                                             valid = UpLeft(&board, sr, sc, &xCounter, &oCounter, player);
                                         }
                                         else{
