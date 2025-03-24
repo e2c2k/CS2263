@@ -77,6 +77,7 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
     Board *temp = createBoard();
     temp ->tiles = board;
     printBoard(temp);
+    freeBoard(temp);
     return false; // No valid move
 }
 //Moves piece up and left 
@@ -108,6 +109,10 @@ bool UpLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char pla
       }
     }
     printf("invalid move\n");
+    Board *temp = createBoard();
+    temp ->tiles = board;
+    printBoard(temp);
+    freeBoard(temp);
     return false; // No valid move
 }
 //Moves piece down and right
@@ -140,6 +145,10 @@ bool DownRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char 
       }
     }
     printf("invalid move\n");
+    Board *temp = createBoard();
+    temp ->tiles = board;
+    printBoard(temp);
+    freeBoard(temp);
     return false; // No valid move
 }
 
@@ -173,6 +182,10 @@ bool DownLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char p
       }
     }
     printf("invalid move\n");
+    Board *temp = createBoard();
+    temp ->tiles = board;
+    printBoard(temp);
+    freeBoard(temp);
     return false; // No valid move
 }
 
