@@ -127,7 +127,7 @@ void searchTree(Directory* dir,char* target){
 	Directory* currentSub = dir->children;
 	while (currentSub != NULL) {
 		Directory* nextChild = currentSub->children;
-		searchTree(child, target); // recursively check groot to see if he's hiding a file
+		searchTree(currentSub, target); // recursively check groot to see if he's hiding a file
 		return;
 	}
 	
