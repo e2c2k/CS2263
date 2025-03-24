@@ -89,7 +89,7 @@ bool DownRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char 
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
                 board[landing_r][landing_c] = player; // Move player to new position
                 board[next_r][next_c] = ' ';  // Remove jumped-over piece
-                board->tiles[sr][sc] = ' ';         // Clear original position
+                board[sr][sc] = ' ';         // Clear original position
 
                 // Decrease opponent's counter
                 if (player == 'o') (*xCounter)--;
