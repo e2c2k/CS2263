@@ -117,20 +117,16 @@ void searchTree(Directory* dir,char* target){
 		return;
 	}
 	File* file = dir->files; // make a file structure for the directory to search files in directory WOWOWOWOW
-	while(file && file != NULL){ // check all files in directory. Had to add the second check to fix infinite loop
+	while(file != NULL){ // check all files in directory. Had to add the second check to fix infinite loop
 		if (strcmp(file->name, target) == 0){ // compare
 			printf("\nFound file: %s\n", file->name);
 			return;
 		}
 		file = file->nextFile; // moving to next file in directory
 	}
-	Directory* currentSub = dir->children;
-	while (currentSub != NULL) {
-		Directory* nextChild = currentSub->children;
-		searchTree(currentSub, target); // recursively check groot to see if he's hiding a file
-		return;
-	}
-	
+	Directory* currentSub = dir->children; // moves to next directory
+	searchTree(currentSub, target); // recursively check groot to see if he's hiding a file
+	return;
 }
 void freeDirectory(Directory* dir) {
     if (dir == NULL) {
