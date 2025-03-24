@@ -48,7 +48,8 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
             }
         }
       else{
-          board = board[next_r][next_c];
+          board[sr][sc] = ' ';
+          board[next_r][next_c] = player;
       }
     }
     return false; // No valid move
