@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
+//sr to move row down is + 1, move up is -1
+//sc to move column right is +1, move left is -1
 // Moves specified peice to the right and up
 bool UpRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){ // sr = start row, sc = start collumn
   if ((sr + 1 >= 0) && (sc - 1 >= 0)) {
@@ -54,8 +55,6 @@ bool UpLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter){
     return false; // No valid move
 }
 //Moves piece down and right
-//sr to move row down is + 1, move up is -1
-//sc to move column right is +1, move left is -1
 bool DownRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){
 
  if ((sr - 1 >= 0) && (sc - 1 >= 0)) {
@@ -81,7 +80,7 @@ bool DownRight(Board *board, int sr, int sc, int *xCounter, int *oCounter){
     }
     return false; // No valid move
 }
-}
+
 //moves down and left
 bool DownLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter, char player) {
     // Move diagonally down-left if within bounds
@@ -127,21 +126,5 @@ bool jump(Board *board, int sr, int sc, int *xCounter, int *oCounter, char playe
             return true; // Valid jump
         }
     }
-
     return false; // No valid jump
 }
-
-
-
-/**
- board->tiles[sr][sc] = board->tiles[sr -1][sc +1];
-    if(board->tiles[sr][sc] == 'x' || board->tiles[sr][sc] == 'X'){
-       jump(Board *board, int sr, int sc, int *xCounter, int *oCounter);
-      xCounter--;
-      return false;
-    }
-    if(board->tiles[sr][sc] == 'o' || board->tiles[sr][sc] == 'O'){
-      oCounter--;
-      return false;
-    }
-*/
