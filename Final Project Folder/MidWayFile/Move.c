@@ -30,11 +30,11 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
   if ((sr - 1 >= 0) && (sc + 1 < BOARD_SIZE)) {
         int next_r = sr - 1; // Move row up
         int next_c = sc + 1; // Move left
-
+        printf("Movement P1\n");
         if (jump(board, next_r, next_c, xCounter, oCounter, player) == true) {
             int landing_r = next_r - 1; // Landing position
             int landing_c = next_c + 1;
-
+            printf("Movement P2\n");
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
                 board[landing_r][landing_c] = player; // Move player to new position
                 board[next_r][next_c] = ' ';  // Remove jumped-over piece
