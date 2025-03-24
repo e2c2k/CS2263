@@ -27,7 +27,7 @@ int main(int argc, char ** argv[]){
                 int sr;
                 int sc;
                 int pChoice;
-                char player = 'X';
+                char player = 'x';
                 int move = 0;
                 bool valid = false;
                 while(playing){
@@ -43,11 +43,11 @@ int main(int argc, char ** argv[]){
                         playing = false;
                     }
                     printf("player %c make your turn.\n", player);
-                    if(player == 'X'){
-                        player = 'O';
+                    if(player == 'x'){
+                        player = 'o';
                     }
                     else{
-                        player = 'X';
+                        player = 'x';
                     }
                     valid = false;
                     while(!valid){
