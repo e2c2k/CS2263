@@ -67,7 +67,7 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
                 return true; // Successfully jumped
             }
         }
-      else if(board[next_r][next_c] != player){
+      else if(board[next_r][next_c] == ' '){
           board[sr][sc] = ' ';
           board[next_r][next_c] = player;
           return true;
@@ -102,7 +102,7 @@ bool UpLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char pla
                 return true; // Successfully jumped
             }
         }
-        else if(board[next_r][next_c] != player){
+        else if(board[next_r][next_c]  == ' '){
           board[sr][sc] = ' ';
           board[next_r][next_c] = player;
           return true;
@@ -138,7 +138,7 @@ bool DownRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char 
                 return true; // Successfully jumped
             }
         }
-     else if(board[next_r][next_c] != player){
+     else if(board[next_r][next_c]  == ' '){
           board[sr][sc] = ' ';
           board[next_r][next_c] = player;
           return true;
@@ -175,7 +175,7 @@ bool DownLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char p
                 return true; // Successfully jumped
             }
         }
-        else if(board[next_r][next_c] != player){
+        else if(board[next_r][next_c]  == ' '){
           board[sr][sc] = ' ';
           board[next_r][next_c] = player;
           return true;
