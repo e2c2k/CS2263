@@ -44,16 +44,16 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
                 if (player == 'o') (*xCounter)--;
                 else (*oCounter)--;
                 printf("Movement done\n");
-                return false; // Successfully jumped
+                return true; // Successfully jumped
             }
         }
       else{
           board[sr][sc] = ' ';
           board[next_r][next_c] = player-32;
-          return false;
+          return true;
       }
     }
-    return true; // No valid move
+    return false; // No valid move
 }
 //Moves piece up and left 
 bool UpLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char player){
