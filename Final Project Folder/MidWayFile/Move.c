@@ -32,8 +32,8 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
         int next_c = sc + 1; // Move left
         printf("Movement P1\n");
         if (jump(board, next_r, next_c, xCounter, oCounter, player) == true) {
-            int landing_r = next_r - 1; // Landing position
-            int landing_c = next_c + 1;
+            int landing_r = next_r - 2; // Landing position
+            int landing_c = next_c + 2;
             printf("Movement P2\n");
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
                 board[landing_r][landing_c] = player; // Move player to new position
@@ -62,8 +62,8 @@ bool UpLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char pla
         int next_c = sc - 1; // Move left
 
         if (jump(board, next_r, next_c, xCounter, oCounter, player) == true) {
-            int landing_r = next_r - 1; // Landing position
-            int landing_c = next_c - 1;
+            int landing_r = next_r - 2; // Landing position
+            int landing_c = next_c - 2;
 
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
                 board[landing_r][landing_c] = player; // Move player to new position
@@ -93,8 +93,8 @@ bool DownRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char 
         int next_c = sc + 1; // Move right
 
         if (jump(board, next_r, next_c, xCounter, oCounter, player) == true) {
-            int landing_r = next_r + 1; // Landing position
-            int landing_c = next_c + 1;
+            int landing_r = next_r + 2; // Landing position
+            int landing_c = next_c + 2;
 
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
                 board[landing_r][landing_c] = player; // Move player to new position
@@ -125,8 +125,8 @@ bool DownLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char p
         int next_c = sc - 1; // Move left
 
         if (jump(board, next_r, next_c, xCounter, oCounter, player)  == true) {
-            int landing_r = next_r + 1; // Landing position
-            int landing_c = next_c - 1;
+            int landing_r = next_r + 2; // Landing position
+            int landing_c = next_c - 2;
 
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
                 board[landing_r][landing_c] = player; // Move player to new position
