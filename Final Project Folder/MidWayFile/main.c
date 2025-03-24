@@ -64,7 +64,7 @@ int main(int argc, char ** argv[]){
                             switch(pChoice){
                                 case 1:
                                     if(board->tiles[sr][sc] == 'o'){
-                                        valid = UpRight(board, sr, sc, &xCounter, &oCounter, player);
+                                        valid = UpRight(*board->tiles, sr, sc, &xCounter, &oCounter, player);
                                     }
                                     else{
                                         valid = DownRight(board, sr, sc, &xCounter, &oCounter, player);
