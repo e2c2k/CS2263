@@ -10,7 +10,7 @@ bool UpRight(Board *board, int sr, int sc, int *xCounter, int *oCounter, char pl
         int next_r = sr - 1; // Move row up
         int next_c = sc + 1; // Move left
 
-        if (jump(board, next_r, next_c, xCounter, oCounter, player)) {
+        if (jump(board, next_r, next_c, xCounter, oCounter, player) == true) {
             int landing_r = next_r - 1; // Landing position
             int landing_c = next_c + 1;
 
@@ -35,7 +35,7 @@ bool UpLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter, char pla
         int next_r = sr - 1; // Move row up
         int next_c = sc - 1; // Move left
 
-        if (jump(board, next_r, next_c, xCounter, oCounter, player)) {
+        if (jump(board, next_r, next_c, xCounter, oCounter, player) == true) {
             int landing_r = next_r - 1; // Landing position
             int landing_c = next_c - 1;
 
@@ -61,7 +61,7 @@ bool DownRight(Board *board, int sr, int sc, int *xCounter, int *oCounter, char 
         int next_r = sr + 1; // Move row down
         int next_c = sc + 1; // Move right
 
-        if (jump(board, next_r, next_c, xCounter, oCounter, player)) {
+        if (jump(board, next_r, next_c, xCounter, oCounter, player) == true) {
             int landing_r = next_r + 1; // Landing position
             int landing_c = next_c + 1;
 
@@ -88,7 +88,7 @@ bool DownLeft(Board *board, int sr, int sc, int *xCounter, int *oCounter, char p
         int next_r = sr + 1; // Move row down
         int next_c = sc - 1; // Move left
 
-        if (jump(board, next_r, next_c, xCounter, oCounter, player)) {
+        if (jump(board, next_r, next_c, xCounter, oCounter, player)  == true) {
             int landing_r = next_r + 1; // Landing position
             int landing_c = next_c - 1;
 
