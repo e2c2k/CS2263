@@ -126,7 +126,6 @@ void searchTree(Directory* dir,char* target){
 	}
 	Directory* child = dir->children;
 	searchTree(child, target); // recursively check groot to see if he's hiding a file
-	printf("Target: %s Not found. \n", target);
 	return;
 	
 }
