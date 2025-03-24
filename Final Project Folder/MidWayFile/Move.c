@@ -74,6 +74,9 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
       }
     }
     printf("invalid move\n");
+    Board *temp = createBoard();
+    temp ->tiles = board;
+    printBoard(temp);
     return false; // No valid move
 }
 //Moves piece up and left 
