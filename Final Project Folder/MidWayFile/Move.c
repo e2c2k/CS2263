@@ -49,7 +49,7 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
         }
       else{
           board[sr][sc] = ' ';
-          board[next_r][next_c] = player-32;
+          board[next_r][next_c] = player;
           return true;
       }
     }
