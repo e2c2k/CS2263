@@ -79,26 +79,45 @@ int main(int argc, char ** argv[]){
                             }
                             else if(board->tiles[sr][sc] == 'X' || board->tiles[sr][sc] == 'O'){
                                 printf("\nMovement choices:\n");
-                                printf("1. Up\n");
-                                printf("2. Down\n");
-                                printf("3. Left\n");
-                                printf("4. Right\n");
+                                printf("1. Up Right\n");
+                                printf("2. Down Right\n");
+                                printf("3. Up Left\n");
+                                printf("4. Up Right\n");
+                                printf("Your choice: ");
+                                scanf(" %d", &pChoice);
                                 switch(pChoice){
+                                    case 1:
+                                        valid = UpRight(board->tiles, sr, sc, &xCounter, &oCounter, player);
+                                    break;
                                     
+                                    case 2:
+                                        valid = DownRight(board->tiles, sr, sc, &xCounter, &oCounter, player); 
+                                    break;
+
+                                    case 3:
+                                            valid = UpLeft(board->tiles, sr, sc, &xCounter, &oCounter, player);
+                                    break;
+
+                                    case 4:
+                                            valid = DownLeft(board->tiles, sr, sc, &xCounter, &oCounter, player);
+                                    break;
+                                    
+                                    default:
+                                        printf("Invalid choice.\n");
+                                    break;
                                 }
-                    }
-                    else{
-                        printf("invalid space\n");
-                    }
-                }
-                if(player == 'x'){
-                        player = 'o';
-                    }
-                    else{
-                        player = 'x';
-                    }
+                            }
+                            else{
+                                printf("invalid space\n");
+                            }
+                     }
+                     if(player == 'x'){
+                         player = 'o';
+                     }
+                     else{
+                         player = 'x';
+                     }
                     valid = false;
-                    
                 }
                 break;
 
@@ -107,7 +126,7 @@ int main(int argc, char ** argv[]){
                 break;
 
             case 3: // Exit
-                // A free Method to be made				
+                freeBoard(board);		
                 return 0;
 
             default:
