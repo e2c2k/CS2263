@@ -34,6 +34,7 @@ bool jump(char **board, int sr, int sc, int *xCounter, int *oCounter, char playe
             default:
                 printf("invalid move type\n");
                 break;
+        }
         // Ensure the landing spot is within the board and is empty
         if (new_r >= 0 && new_r < BOARD_SIZE && new_c >= 0 && new_c < BOARD_SIZE &&
             board[new_r][new_c] == ' ') {
