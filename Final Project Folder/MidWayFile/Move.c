@@ -25,7 +25,7 @@ bool jump(Board *board, int sr, int sc, int *xCounter, int *oCounter, char playe
 }
 
 // Moves specified peice to the right and up
-bool UpRight(Board *board, int sr, int sc, int *xCounter, int *oCounter, char player){ // sr = start row, sc = start collumn
+bool UpRight(char *board, int sr, int sc, int *xCounter, int *oCounter, char player){ // sr = start row, sc = start collumn
   if ((sr - 1 >= 0) && (sc + 1 < BOARD_SIZE)) {
         int next_r = sr - 1; // Move row up
         int next_c = sc + 1; // Move left
