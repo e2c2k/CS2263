@@ -108,7 +108,7 @@ void listDirectory(Directory* dir, int depth){
 }
 void searchTree(Directory* dir,char* target){
 	if (!dir){ // initial check to see if the root is rooting
-		printf("Target: %s Not found.", target);
+		printf("Target: %s Not found.\n", target);
 		return;
 	}
 	printf("%s/", dir->name);
@@ -124,9 +124,12 @@ void searchTree(Directory* dir,char* target){
 		}
 		file = file->nextFile; // moving to next file in directory
 	}
-	Directory* child = dir->children;
-	searchTree(child, target); // recursively check groot to see if he's hiding a file
-	return;
+	Directory* currentSub = dir->children;
+	while (currentSub != NULL) {
+		Directory* nextChild = currentSub->children;
+		searchTree(child, target); // recursively check groot to see if he's hiding a file
+		return;
+	}
 	
 }
 void freeDirectory(Directory* dir) {
