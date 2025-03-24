@@ -112,7 +112,7 @@ void searchTree(Directory* dir,char* target){
 		return;
 	}
 	if(strcmp(dir->name, "root") == 0) printf("Directory: %s/", dir->name);
-	printf("%s/", dir->name)
+	printf("%s/", dir->name);
 	if(strcmp(dir->name, target) == 0){ // looking for a directory scowering.
 		printf("Found directory:  %s \n", dir->name);
 		return;
