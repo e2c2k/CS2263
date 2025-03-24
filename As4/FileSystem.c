@@ -124,10 +124,8 @@ void searchTree(Directory* dir,char* target){
 		}
 		file = file->nextFile; // moving to next file in directory
 	}
-	while(dir -> children != NULL){ // checks if the current directory has a child... dir may be pregnant might not have a child yet
-		Directory* child = dir->children;
-		searchTree(child, target); // recursively check groot to see if he's hiding a file
-	}
+	Directory* child = dir->children;
+	searchTree(child, target); // recursively check groot to see if he's hiding a file
 	printf("Target: %s Not found. \n", target);
 	return;
 	
