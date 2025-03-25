@@ -52,6 +52,7 @@ int main(int argc, char ** argv[]){
                             printf("\nMovement choices:\n");
                             printf("1. Diagonal right\n");
                             printf("2. Diagonal left\n");
+                            printf("3. Exit game\n");                            
                             printf("Your choice: ");
                             scanf(" %d", &pChoice);
                             switch(pChoice){
@@ -72,6 +73,11 @@ int main(int argc, char ** argv[]){
                                             valid = DownLeft(board->tiles, sr, sc, &xCounter, &oCounter, player);
                                         }
                                     break;
+                                    case 3:
+                                        freeBoard(board); // free board so no memory leak :)
+                                        playing = false; //ends current game
+                                        
+                                    break;                                    
                                     default:
                                         printf("Invalid choice.\n");
                                     break;
