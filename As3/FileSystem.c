@@ -70,7 +70,7 @@ void addFile(Directory* parentDir,char* name, int size){
             printf("File already exists\n");
             return;
         }
-        file = file->nextFile; // exits once last file in list is reached same concept as adding directory
+        file = file->nextFile; // exit once last file in list is reached same concept as adding directory
     }
     newFile->nextFile = parentDir->files;
     parentDir->files = newFile;
