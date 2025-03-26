@@ -108,7 +108,7 @@ void listDirectory(Directory* dir, int depth){
 }
 void searchTree(Directory* dir,char* target){
 	if (!dir){ // initial check to see if the root is rooting
-		printf("Target: %s Not found.\n", target);
+		printf("\nTarget: %s Not found.\n", target);
 		return;
 	}
 	printf("%s/", dir->name);
