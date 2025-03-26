@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "FileSystem.h"
+#include "FileSystem.c"
 int main() {
     Directory* root = createGroot();
     int choice, size;
     char name[MAX_NAME_LENGTH], parentName[MAX_NAME_LENGTH];
     Directory* parent;
-    printf("\nFile System Hierarchy Manager\n");
+    printf("\n+++++++File System Hierarchy Manager+++++++\n");
 
     while (1) {
-        printf("1. Create a New Directory\n");
+        printf("\n1. Create a New Directory\n");
         printf("2. Create a New File\n");
         printf("3. List Contents\n");
         printf("4. Search for an Item\n");
@@ -24,10 +24,10 @@ int main() {
                 scanf("%s", parentName);
                 parent = findDirectory(root, parentName);
                 if (!parent) {
-                    printf("Parent directory not found\n");
+                    printf("\n++++++++++++Parent directory not found+++++++++++\n");
                     break;
                 }
-                printf("Enter directory name: ");
+                printf("Enter new directory name: ");
                 scanf("%s", name);
                 addDirectory(parent, name);
                 break;
@@ -37,7 +37,7 @@ int main() {
                 scanf("%s", parentName);
                 parent = findDirectory(root, parentName);
                 if (!parent) {
-                    printf("Parent directory not found!\n");
+                    printf("\n++++++++++++Parent directory not found+++++++++++\n");
                     break;
                 }
                 printf("Enter file name: ");
@@ -58,7 +58,7 @@ int main() {
                 break;
 
             case 5: // exit
-                printf("You Cant Leave");
+                printf("You Can't Leave");
                 freeDirectory(root);
                 return 0;
 
