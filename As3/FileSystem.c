@@ -107,26 +107,28 @@ void listDirectory(Directory* dir, int depth){
     }
 }
 void searchTree(Directory* dir,char* target){
-	if (!dir){ // initial check to see if the root is rooting
+	if (!dir){ // initial check to see if the directory is directing
 		printf("\nTarget: %s Not found.\n", target);
 		return;
 	}
 	printf("%s/", dir->name);
-	if(strcmp(dir->name, target) == 0){ // looking for a directory scowering.
+	if(strcmp(dir->name, target) == 0){ // looking for a directory comparison
 		printf("\nFound directory:  %s \n", dir->name);
 		return;
 	}
-	File* file = dir->files; // make a file structure for the directory to search files in directory WOWOWOWOW
-	while(file != NULL){ // check all files in directory. Had to add the second check to fix infinite loop
+	File* file = dir->files; // make a file structure for the directory to search files in directory
+	while(file){ // check all files in directory.
 		if (strcmp(file->name, target) == 0){ // compare
 			printf("\nFound file: %s\n", file->name);
 			return;
 		}
 		file = file->nextFile; // moving to next file in directory
 	}
-	Directory* currentSub = dir->children; // moves to next directory
-	searchTree(currentSub, target); // recursively check groot to see if he's hiding a file
-	return;
+	Directory* child = dir->children; // moves to next directory
+	while (child) {
+        searchTree(child, target);
+        child = child->nextDir;
+    }
 }
 void freeDirectory(Directory* dir) {
     if (dir == NULL) {
