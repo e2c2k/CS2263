@@ -50,3 +50,15 @@ char * GetScoreBoard() {
     sprintf(result, "Player1: %d, Player2: %d", player1, player2);
     return result;
 }
+
+char * resetScoreBoard() {
+    char * filepath = "/Users/michaeldrost/CS2263/Final_Project_Folder/scoreboard.txt"; 
+    FILE *file = fopen(filepath, "w");
+    if (!file) {
+        fprintf(stderr, "Error opening file: %s\n", filepath);
+        return NULL;
+    }
+    fprintf(file, "0,0");
+    fclose(file);
+    return "Scoreboard reset";
+}
