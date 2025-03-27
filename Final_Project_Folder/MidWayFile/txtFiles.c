@@ -3,7 +3,7 @@
 
 
 
-void update_player_wins(int player_number) {
+void UpdateScoreBoard(int player_number) {
     int player1 = 0;
     int player2 = 0;
     char * filepath = "/Users/michaeldrost/CS2263/Final_Project_Folder/scoreboard.txt"; 
@@ -29,14 +29,24 @@ void update_player_wins(int player_number) {
         fprintf(stderr, "Error opening file: %s\n", filepath);
         return;
     }
-    
     fprintf(file, "%d,%d", player1, player2);
     fclose(file);
 
     printf("score:  Player1: %d, Player2: %d\n", player1, player2);
 }
 
-int main (){
-    update_player_wins(2);
-    return 0;
+char * GetScoreBoard() {
+    char * filepath = "/Users/michaeldrost/CS2263/Final_Project_Folder/scoreboard.txt"; 
+    FILE *file = fopen(filepath, "r");
+    if (!file) {
+        fprintf(stderr, "Error opening file: %s\n", filepath);
+        return NULL;
+    }
+    int player1 = 0;
+    int player2 = 0;
+    fscanf(file, "%d,%d", &player1, &player2);
+    fclose(file);
+    char * result = (char *)malloc(100);
+    sprintf(result, "Player1: %d, Player2: %d", player1, player2);
+    return result;
 }
