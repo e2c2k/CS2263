@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "Move.c"
-3INCLUDE "txtFiles.c"
+#include "txtFiles.c"
 #define BOARD_SIZE 8
 int main(int argc, char ** argv[]){
     int choice;
