@@ -133,13 +133,13 @@ int main(int argc, char ** argv[]){
                 break;
 
             case 2: // Display Stats
-               char stats = GetScoreBoard();
+               char *stats = GetScoreBoard();
                 printf("Current Scores: \n%s", stats);
                 freeBoard(board);
                 break;
 
             case 3: // reset statistics
-                char reset = resetScoreBoard();
+                char *reset = resetScoreBoard();
                 if(reset != NULL){
                     printf("%s\n", reset);
                 }
