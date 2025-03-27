@@ -54,6 +54,7 @@ int main() {
             case 4: // Search
                 printf("Enter name to search: ");
                 scanf("%s", name);
+                printf("Search results: \n");
                 searchTree(root, name);
                 break;
 
