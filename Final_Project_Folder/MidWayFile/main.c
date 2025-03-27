@@ -140,7 +140,7 @@ int main(int argc, char ** argv[]){
 
             case 3: // reset statistics
                 char reset = resetScoreBoard();
-                if(reset != null){
+                if(reset != NULL){
                     printf("%s\n", reset);
                 }
                 freeBoard(board);		
