@@ -15,6 +15,10 @@
 Board * createBoard(){
     Board *board;
     board = (Board*)malloc(sizeof(Board)); // allocate board
+    if(board == NULL){
+    	printf("allocation failed");
+    	return NULL;
+    }
     board->tiles = (char**)malloc(BOARD_SIZE * sizeof(char*)); // allocate array
     for (int i = 0; i < BOARD_SIZE; i++) {
         board->tiles[i] = (char*)malloc(BOARD_SIZE * sizeof(char)); // allocate each row
@@ -74,7 +78,6 @@ void printBoard(Board *board) {
     }
 }
 void freeBoard(Board *board){
-    free(board->tiles);
     free(board);
     printf("Board Free'd\n");
 }
