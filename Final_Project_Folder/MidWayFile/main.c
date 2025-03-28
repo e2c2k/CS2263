@@ -32,6 +32,7 @@ int main(int argc, char ** argv[]){
                 char player = 'x';
                 int move = 0;
                 bool valid = false;
+                bool isValidMove;
                 while(playing){
                     printBoard(board);
                     printf("Current Score:\nPlayer 1: %d Pieces captured\nPlayer 2: %d Pieces captured\n", 12 - xCounter, 12 - oCounter);
@@ -48,6 +49,21 @@ int main(int argc, char ** argv[]){
                     else{
                         printf("player %c make your turn.\n", player);
                         while(!valid){
+                                isValidMove = false;
+                            	while(!isValidMove){
+    		                    printf("Select the row of the piece to move: ");
+    		                    scanf(" %d", &sr);
+    		                    
+    		                    printf("Select the column of the piece to move: ");
+    		                    scanf(" %d", &sc);
+    		                    if((sr < 7 && sr > 0) || (sc < 7 && sc > 0)){
+    		                    	isValidMove = true;
+    		                    }
+    		                    else{
+    		                    isValidMove = false;
+    		                    	printf("invalid position on the board\n");
+    		                    }
+    		                }
                             printf("Select the row of the piece to move: ");
                             scanf(" %d", &sr);
                             printf("Select the column of the piece to move: ");
