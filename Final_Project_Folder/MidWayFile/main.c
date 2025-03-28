@@ -34,7 +34,7 @@ int main(int argc, char ** argv[]){
                 bool valid = false;
                 while(playing){
                     printBoard(board);
-                    printf("Current Score:\nPlayer 1: %d\nPlayer 2: %d\n", 12 - xCounter, 12 - oCounter);
+                    printf("Current Score:\nPlayer 1: %d Pieces captured\nPlayer 2: %d Pieces captured\n", 12 - xCounter, 12 - oCounter);
                     if(xCounter == 0){
                         printf(" O's win!\n");
                         UpdateScoreBoard(2);
@@ -78,9 +78,8 @@ int main(int argc, char ** argv[]){
                                             }
                                         break;
                                         case 3:
-                                            freeBoard(board); // free board so no memory leak :)
                                             playing = false; //ends current game
-                                            
+                                            valid = true;
                                         break;                                    
                                         default:
                                             printf("Invalid choice.\n");
