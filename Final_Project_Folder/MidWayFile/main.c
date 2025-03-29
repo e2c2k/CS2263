@@ -35,7 +35,7 @@ int main(int argc, char ** argv[]){
                 bool isValidMove;
                 while(playing){
                     printBoard(board);
-                    printf("Current Score:\nPlayer 1: %d Pieces captured\nPlayer 2: %d Pieces captured\n", 12 - xCounter, 12 - oCounter);
+                    printf("Current Score:\nPlayer 1: %d Pieces captured\nPlayer 2: %d Pieces captured\n", 12 - oCounter, 12 - xCounter);
                     if(xCounter == 0){
                         printf(" O's win!\n");
                         UpdateScoreBoard(2);
@@ -49,25 +49,21 @@ int main(int argc, char ** argv[]){
                     else{
                         printf("player %c make your turn.\n", player);
                         while(!valid){
-                                isValidMove = false;
-                            	while(!isValidMove){
-    		                    printf("Select the row of the piece to move: ");
-    		                    scanf(" %d", &sr);
-    		                    
-    		                    printf("Select the column of the piece to move: ");
-    		                    scanf(" %d", &sc);
-    		                    if((sr < 7 && sr > 0) || (sc < 7 && sc > 0)){
-    		                    	isValidMove = true;
-    		                    }
-    		                    else{
-    		                    isValidMove = false;
-    		                    	printf("invalid position on the board\n");
-    		                    }
-    		                }
-                            printf("Select the row of the piece to move: ");
-                            scanf(" %d", &sr);
-                            printf("Select the column of the piece to move: ");
-                            scanf(" %d", &sc);
+                        	isValidMove = false;
+                        	while(!isValidMove){
+		                    printf("Select the row of the piece to move: ");
+		                    scanf(" %d", &sr);
+		                    
+		                    printf("Select the column of the piece to move: ");
+		                    scanf(" %d", &sc);
+		                    if((sr < 8 && sr > 0) || (sc < 8 && sc > 0)){
+		                    	isValidMove = true;
+		                    }
+		                    else{
+		                    isValidMove = false;
+		                    	printf("invalid position on the board\n");
+		                    }
+		                }
                             if(board->tiles[sr][sc] == 'x' || board->tiles[sr][sc] == 'o'){
                                 printf("\nMovement choices:\n");
                                 printf("1. Diagonal right\n");
@@ -96,6 +92,7 @@ int main(int argc, char ** argv[]){
                                         case 3:
                                             playing = false; //ends current game
                                             valid = true;
+                                            
                                         break;                                    
                                         default:
                                             printf("Invalid choice.\n");
@@ -107,7 +104,7 @@ int main(int argc, char ** argv[]){
                                     printf("1. Up Right\n");
                                     printf("2. Down Right\n");
                                     printf("3. Up Left\n");
-                                    printf("4. Up Right\n");
+                                    printf("4. Down Left\n");
                                     printf("Your choice: ");
                                     scanf(" %d", &pChoice);
                                     switch(pChoice){
@@ -150,15 +147,13 @@ int main(int argc, char ** argv[]){
             case 2: // Display Stats
                char *stats = GetScoreBoard();
                 printf("Current Scores: \n%s", stats);
-                freeBoard(board);
                 break;
 
             case 3: // reset statistics
                 char *reset = resetScoreBoard();
                 if(reset != NULL){
                     printf("%s\n", reset);
-                }
-                freeBoard(board);		
+                }	
                 break;
 
             case 4: // Exit
@@ -173,4 +168,3 @@ int main(int argc, char ** argv[]){
 
     return 0; // This line is not reached due to return above
 }
-
