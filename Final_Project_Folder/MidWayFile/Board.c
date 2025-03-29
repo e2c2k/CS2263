@@ -68,10 +68,12 @@ void printBoard(Board *board) {
             } else if (board->tiles[i][j] == 'o') {
                 piece = RED_PIECE;  // Player O regular
                 } else if (board->tiles[i][j] == 'X') {
-                piece = TOADD;  // Player x Crowned
-                } else if (board->tiles[i][j] == 'O') {
-                piece = TOADD;  // Player O Crowned
-            } else {
+               // piece = TOADD;  // Player x Crowned
+               }
+                else if (board->tiles[i][j] == 'O') {
+               // piece = TOADD;  // Player O Crowned
+               }
+            else {
                 piece = " ";  // Empty space
             }
 
