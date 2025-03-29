@@ -7,8 +7,10 @@
 #define RESET     "\x1b[0m"   // Reset colors
 
 // ANSI for checkers pieces
-#define RED_PIECE  "\x1b[31mo\x1b[0m"  //Red piece (Player O)
-#define BLACK_PIECE "\x1b[37mx\x1b[0m"  //White text on black background (Player X)
+#define RED_REG_PIECE  "\x1b[31mo\x1b[0m"  //Red piece (Player o)
+#define WHITE_REG_PIECE "\x1b[37mx\x1b[0m"  //White text on black background (Player x)
+#define RED_CROWN_PIECE  "\x1b[31mO\x1b[0m"  //Red piece (Player o) as O
+#define WHITE_CROWN_PIECE "\x1b[37mX\x1b[0m"  //White piece(Player x) as X
 
 
 
@@ -64,14 +66,14 @@ void printBoard(Board *board) {
             // Get piece character with color
             char *piece;
             if (board->tiles[i][j] == 'x') {
-                piece = BLACK_PIECE;  // Player X regular
+                piece = WHITE_REG_PIECE;  // Player X regular
             } else if (board->tiles[i][j] == 'o') {
-                piece = RED_PIECE;  // Player O regular
+                piece = RED_REG_PIECE;  // Player O regular
                 } else if (board->tiles[i][j] == 'X') {
-               // piece = TOADD;  // Player x Crowned
+                piece = WHITE_CROWN_PIECE;  // Player x Crowned
                }
                 else if (board->tiles[i][j] == 'O') {
-               // piece = TOADD;  // Player O Crowned
+               piece = RED_CROWN_PIECE;  // Player O Crowned
                }
             else {
                 piece = " ";  // Empty space
