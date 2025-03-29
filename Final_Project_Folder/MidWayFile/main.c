@@ -64,7 +64,7 @@ int main(int argc, char ** argv[]){
 		                    	printf("invalid position on the board\n");
 		                    }
 		                }
-                            if(board->tiles[sr][sc] == 'x' || board->tiles[sr][sc] == 'o'){
+                            if(board->tiles[sr][sc] == player && (board->tiles[sr][sc] == 'x' || board->tiles[sr][sc] == 'o')){
                                 printf("\nMovement choices:\n");
                                 printf("1. Diagonal right\n");
                                 printf("2. Diagonal left\n");
@@ -99,7 +99,7 @@ int main(int argc, char ** argv[]){
                                         break;
                                     }
                                 }
-                                else if(board->tiles[sr][sc] == 'X' || board->tiles[sr][sc] == 'O'){
+                                else if(board->tiles[sr][sc] == (player -32) && (board->tiles[sr][sc] == 'X' || board->tiles[sr][sc] == 'O')){
                                     printf("\nMovement choices:\n");
                                     printf("1. Up Right\n");
                                     printf("2. Down Right\n");
