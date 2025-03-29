@@ -64,9 +64,13 @@ void printBoard(Board *board) {
             // Get piece character with color
             char *piece;
             if (board->tiles[i][j] == 'x') {
-                piece = BLACK_PIECE;  // Player X
+                piece = BLACK_PIECE;  // Player X regular
             } else if (board->tiles[i][j] == 'o') {
-                piece = RED_PIECE;  // Player O
+                piece = RED_PIECE;  // Player O regular
+                } else if (board->tiles[i][j] == 'X') {
+                piece = TOADD;  // Player x Crowned
+                } else if (board->tiles[i][j] == 'O') {
+                piece = TOADD;  // Player O Crowned
             } else {
                 piece = " ";  // Empty space
             }
@@ -78,6 +82,7 @@ void printBoard(Board *board) {
     }
 }
 void freeBoard(Board *board){
+    //free(board->tiles);
     free(board);
     printf("Board Free'd\n");
 }
