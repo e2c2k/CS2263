@@ -1,4 +1,4 @@
-#include "Board.c"
+ #include "Board.c"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -37,7 +37,7 @@ bool jump(char **board, int sr, int sc, int *xCounter, int *oCounter, char playe
         }
         // Ensure the landing spot is within the board and is empty
         if (new_r >= 0 && new_r < BOARD_SIZE && new_c >= 0 && new_c < BOARD_SIZE &&
-            board[new_r][new_c] == ' ') {
+            board[new_r][new_r] == ' ') {
             printf("Jump reached\n");
             return true; // Valid jump
         }
@@ -56,10 +56,30 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
             int landing_c = next_c + 1;
             printf("Movement P2\n");
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
-                board[landing_r][landing_c] = player; // Move player to new position
-                board[next_r][next_c] = ' ';  // Remove jumped-over piece
-                board[sr][sc] = ' ';         // Clear original position
-
+            	if(board[sr][sc] == player){
+            		if(landing_r == 0){
+            			board[landing_r][landing_c] = 'X'; // Move player to new position
+				board[next_r][next_c] = ' ';  // Remove jumped-over piece
+				board[sr][sc] = ' '; 
+			}
+            		 else if(landing_r == 7){
+            			board[landing_r][landing_c] = 'O'; // Move player to new position
+				board[next_r][next_c] = ' ';  // Remove jumped-over piece
+				board[sr][sc] = ' '; 
+			}
+			else{
+		        	board[landing_r][landing_c] = player; // Move player to new position
+				board[next_r][next_c] = ' ';  // Remove jumped-over piece
+				board[sr][sc] = ' ';         // Clear original position
+			}
+		}
+		else{
+			printf("Movement Crown\n");
+			char crown = player - 32;
+			board[landing_r][landing_c] = crown; // Move player to new position
+			board[next_r][next_c] = ' ';  // Remove jumped-over piece
+			board[sr][sc] = ' ';
+		}
                 // Decrease opponent's counter
                 if (player == 'o') (*xCounter)--;
                 else (*oCounter)--;
@@ -68,10 +88,27 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
             }
         }
       else if(board[next_r][next_c] == ' '){
-          board[sr][sc] = ' ';
-          board[next_r][next_c] = player;
-          return true;
-      }
+          if(board[sr][sc] == player){
+          	if(next_r == 0){
+          		board[next_r][next_c] = 'X';  // Remove jumped-over piece
+			board[sr][sc] = ' '; 
+		}
+          	 else if(next_r == 7){
+				board[next_r][next_c] = 'O';  // Remove jumped-over piece
+				board[sr][sc] = ' '; 
+		}
+		else{
+		        board[next_r][next_c] = player;  // place non crowned piece
+		        board[sr][sc] = ' ';         // Clear original position
+		}
+	}
+	else{
+	char crown = player - 32;
+		board[next_r][next_c] = crown;  // place crowned piece
+		board[sr][sc] = ' ';	// Clear original position
+	}
+        return true;
+     }
     }
     printf("invalid move\n");
     Board *temp = createBoard();
@@ -91,10 +128,29 @@ bool UpLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char pla
             int landing_c = next_c - 1;
             printf("Movement P2\n");
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
-                board[landing_r][landing_c] = player; // Move player to new position
-                board[next_r][next_c] = ' ';  // Remove jumped-over piece
-                board[sr][sc] = ' ';         // Clear original position
-
+                if(board[sr][sc] == player){
+            		if(landing_r == 0){
+            			board[landing_r][landing_c] = 'X'; // Move player to new position
+				board[next_r][next_c] = ' ';  // Remove jumped-over piece
+				board[sr][sc] = ' '; 
+			}
+            		 else if(landing_r == 7){
+            			board[landing_r][landing_c] = 'O'; // Move player to new position
+				board[next_r][next_c] = ' ';  // Remove jumped-over piece
+				board[sr][sc] = ' '; 
+			}
+			else{
+		        	board[landing_r][landing_c] = player; // Move player to new position
+				board[next_r][next_c] = ' ';  // Remove jumped-over piece
+				board[sr][sc] = ' ';         // Clear original position
+			}
+		}
+		else{
+			char crown = player - 32;
+			board[landing_r][landing_c] = crown; // Move player to new position
+			board[next_r][next_c] = ' ';  // Remove jumped-over piece
+			board[sr][sc] = ' ';
+		}
                 // Decrease opponent's counter
                 if (player == 'o') (*xCounter)--;
                 else (*oCounter)--;
@@ -103,8 +159,25 @@ bool UpLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char pla
             }
         }
         else if(board[next_r][next_c]  == ' '){
-          board[sr][sc] = ' ';
-          board[next_r][next_c] = player;
+        if(board[sr][sc] == player){
+          	if(next_r == 0){
+          		board[next_r][next_c] = 'X';  // Remove jumped-over piece
+			board[sr][sc] = ' '; 
+		}
+          	 else if(next_r == 7){
+				board[next_r][next_c] = 'O';  // Remove jumped-over piece
+				board[sr][sc] = ' '; 
+		}
+		else{
+		        board[next_r][next_c] = player;  // place non crowned piece
+		        board[sr][sc] = ' ';         // Clear original position
+		}
+	}
+	else{
+	char crown = player - 32;
+		board[next_r][next_c] = crown;  // place crowned piece
+		board[sr][sc] = ' ';	// Clear original position
+	}
           return true;
       }
     }
@@ -127,9 +200,29 @@ bool DownRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char 
             int landing_c = next_c + 1;
             printf("Movement P2\n");
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
-                board[landing_r][landing_c] = player; // Move player to new position
-                board[next_r][next_c] = ' ';  // Remove jumped-over piece
-                board[sr][sc] = ' ';         // Clear original position
+                if(board[sr][sc] == player){
+            		if(landing_r == 0){
+            			board[landing_r][landing_c] = 'X'; // Move player to new position
+				board[next_r][next_c] = ' ';  // Remove jumped-over piece
+				board[sr][sc] = ' '; 
+			}
+            		 else if(landing_r == 7){
+            			board[landing_r][landing_c] = 'O'; // Move player to new position
+				board[next_r][next_c] = ' ';  // Remove jumped-over piece
+				board[sr][sc] = ' '; 
+			}
+			else{
+		        	board[landing_r][landing_c] = player; // Move player to new position
+				board[next_r][next_c] = ' ';  // Remove jumped-over piece
+				board[sr][sc] = ' ';         // Clear original position
+			}
+		}
+		else{
+			char crown = player - 32;
+			board[landing_r][landing_c] = crown; // Move player to new position
+			board[next_r][next_c] = ' ';  // Remove jumped-over piece
+			board[sr][sc] = ' ';
+		}
 
                 // Decrease opponent's counter
                 if (player == 'o') (*xCounter)--;
@@ -139,8 +232,25 @@ bool DownRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char 
             }
         }
      else if(board[next_r][next_c]  == ' '){
-          board[sr][sc] = ' ';
-          board[next_r][next_c] = player;
+          if(board[sr][sc] == player){
+          	if(next_r == 0){
+          		board[next_r][next_c] = 'X';  // Remove jumped-over piece
+			board[sr][sc] = ' '; 
+		}
+          	 else if(next_r == 7){
+				board[next_r][next_c] = 'O';  // Remove jumped-over piece
+				board[sr][sc] = ' '; 
+		}
+		else{
+		        board[next_r][next_c] = player;  // place non crowned piece
+		        board[sr][sc] = ' ';         // Clear original position
+		}
+	}
+	else{
+	char crown = player - 32;
+		board[next_r][next_c] = crown;  // place crowned piece
+		board[sr][sc] = ' ';	// Clear original position
+	}
           return true;
       }
     }
@@ -164,9 +274,29 @@ bool DownLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char p
             int landing_c = next_c - 1;
             printf("Movement P2\n");
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
-                board[landing_r][landing_c] = player; // Move player to new position
-                board[next_r][next_c] = ' ';  // Remove jumped-over piece
-                board[sr][sc] = ' ';         // Clear original position
+                if(board[sr][sc] == player){
+            		if(landing_r == 0){
+            			board[landing_r][landing_c] = 'X'; // Move player to new position
+				board[next_r][next_c] = ' ';  // Remove jumped-over piece
+				board[sr][sc] = ' '; 
+			}
+            		 else if(landing_r == 7){
+            			board[landing_r][landing_c] = 'O'; // Move player to new position
+				board[next_r][next_c] = ' ';  // Remove jumped-over piece
+				board[sr][sc] = ' '; 
+			}
+			else{
+		        	board[landing_r][landing_c] = player; // Move player to new position
+				board[next_r][next_c] = ' ';  // Remove jumped-over piece
+				board[sr][sc] = ' ';         // Clear original position
+			}
+		}
+		else{
+			char crown = player - 32;
+			board[landing_r][landing_c] = crown; // Move player to new position
+			board[next_r][next_c] = ' ';  // Remove jumped-over piece
+			board[sr][sc] = ' ';
+		}
 
                 // Decrease opponent's counter
                 if (player == 'o') (*xCounter)--;
@@ -176,8 +306,25 @@ bool DownLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char p
             }
         }
         else if(board[next_r][next_c]  == ' '){
-          board[sr][sc] = ' ';
-          board[next_r][next_c] = player;
+          if(board[sr][sc] == player){
+          	if(next_r == 0){
+          		board[next_r][next_c] = 'X';  // Remove jumped-over piece
+			board[sr][sc] = ' '; 
+		}
+          	 else if(next_r == 7){
+				board[next_r][next_c] = 'O';  // Remove jumped-over piece
+				board[sr][sc] = ' '; 
+		}
+		else{
+		        board[next_r][next_c] = player;  // place non crowned piece
+		        board[sr][sc] = ' ';         // Clear original position
+		}
+	}
+	else{
+	char crown = player - 32;
+		board[next_r][next_c] = crown;  // place crowned piece
+		board[sr][sc] = ' ';	// Clear original position
+	}
           return true;
       }
     }
@@ -188,6 +335,3 @@ bool DownLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char p
     freeBoard(temp);
     return false; // No valid move
 }
-
-
-
