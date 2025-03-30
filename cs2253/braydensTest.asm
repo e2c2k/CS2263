@@ -7,13 +7,15 @@ num_requests: .word 0        # Number of requests
 emergency_flag: .word 0      # Emergency stop flag
 alarm_flag: .word 0          # Alarm flag
 msg_floor: .asciiz "Current Floor: "
-msg_request: .asciiz "Enter floor request (1-5) or 0 for emergency: "
+msg_request: .asciiz "Enter floor request (1-5) or 0 for emergency, 9 to reset: "
 msg_moving_up: .asciiz "Moving Up\n"
 msg_moving_down: .asciiz "Moving Down\n"
 msg_stop: .asciiz "Stopping at floor "
 msg_emergency: .asciiz "EMERGENCY STOP ACTIVATED!\n"
 msg_alarm: .asciiz "ALARM ACTIVATED!\n"
 msg_reset: .asciiz "Press 9 to reset emergency: "
+msg_invalid: .asciiz "Invalid Input!\n"
+msg_no_requests: .asciiz "No pending requests.\n"
 
 .text
 main:
@@ -38,10 +40,11 @@ main:
 
     # Emergency stop check
     beq $t0, 0, emergency_stop
+    beq $t0, 9, reset_emergency
 
     # Add floor request to queue if valid (1-5)
-    blt $t0, 1, main
-    bgt $t0, 5, main
+    blt $t0, 1, invalid_input
+    bgt $t0, 5, invalid_input
     jal add_request
 
     # Process requests
@@ -54,13 +57,23 @@ emergency_stop:
     li $v0, 4
     la $a0, msg_emergency
     syscall
-    sw $zero, emergency_flag  # Set flag
+    li $t1, 1
+    sw $t1, emergency_flag  # Set flag
+    j main
+
+# Reset Emergency Stop
+reset_emergency:
     li $v0, 4
     la $a0, msg_reset
     syscall
-    li $v0, 5
+    sw $zero, emergency_flag  # Clear flag
+    j main
+
+# Invalid Input Handler
+invalid_input:
+    li $v0, 4
+    la $a0, msg_invalid
     syscall
-    bne $v0, 9, emergency_stop
     j main
 
 # Add Request to Queue
@@ -77,7 +90,7 @@ add_request:
 # Process Requests
 process_requests:
     lw $t1, num_requests
-    beqz $t1, end_movement  # No requests, exit
+    beqz $t1, no_requests  # No requests, exit
 
     lw $t2, request_queue  # Get first request
     lw $t3, current_floor
@@ -115,7 +128,33 @@ stop_elevator:
     li $v0, 11
     li $a0, '\n'
     syscall
+    jal remove_request
     j main
 
-end_movement:
+# Remove Completed Request
+remove_request:
+    lw $t1, num_requests
+    subi $t1, $t1, 1
+    sw $t1, num_requests
+    la $t2, request_queue
+    addi $t2, $t2, 4  # Shift queue
+    la $t3, request_queue
+    move $t4, $zero
+shift_loop:
+    beq $t4, $t1, end_shift
+    lw $t5, 0($t2)
+    sw $t5, 0($t3)
+    addi $t2, $t2, 4
+    addi $t3, $t3, 4
+    addi $t4, $t4, 1
+    j shift_loop
+
+end_shift:
     jr $ra
+
+# No Requests Message
+no_requests:
+    li $v0, 4
+    la $a0, msg_no_requests
+    syscall
+    j main
