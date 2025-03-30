@@ -84,6 +84,10 @@ movePersonAndElevatorToFloor:
     li $v0, 5
     syscall
 
+# check if call is in floor range (0-5)
+    blt $v0, 0, invalid_floor
+    bgt $v0, 5, invalid_floor
+
     # moves the person and elevator to the same floor
     move $s0, $v0
     move $s1, $v0
