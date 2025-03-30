@@ -5,6 +5,7 @@ personFloor: .asciiz "\nYou're on floor " #$s1
 menuChoice: .asciiz "\n1. Call Elevator\n2. Use Elevator \n3. Exit\n"
 differentFloor: .asciiz "\nError: Elevator and person are on different floors\nCall the elevator first\n"
 wrongChoice: .asciiz "\nError: Invalid choice\n"
+outOfBounds: .asciiz "\nError: Invalid floor selection. Choose between 0 and 5.\n"
 .text
 main:
 
@@ -63,6 +64,9 @@ callElevatorToFloor:
 
     li $v0, 5
     syscall
+    # check if call is in floor range (0-5)
+    blt $v0, 0, invalid_floor
+    bgt $v0, 5, invalid_floor
 
     move $s0, $v0
 
@@ -91,6 +95,12 @@ error:
     la $a0, differentFloor
     syscall
 
+    j menu
+
+invalid_floor:
+    li $v0, 4
+    la $a0, outOfBounds
+    syscall
     j menu
 
 exit:
