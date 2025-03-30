@@ -1,10 +1,10 @@
 .data
 floors: .word 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 current_floor: .word 1
-requests: .space 40    # Space for 10 floor requests (4 bytes each)
+requests: .space 40    # Space for 10 floor requests cause 10 floors
 request_count: .word 0  # Number of pending requests
 emergency_flag: .word 0 # 0 = normal, 1 = emergency mode
-menu_prompt: .asciiz "\nCurrent floor: "
+floor_prompt: .asciiz "\nCurrent floor: "
 menu_options: .asciiz "\n1: Request Floor\n2: Run Elevator\n3: Emergency Stop\n4: Reset\nChoice: "
 enter_floor_prompt: .asciiz "\nEnter floor (1-10): "
 direction_message: .asciiz "\nMoving "
@@ -20,17 +20,17 @@ invalid_floor_message: .asciiz "\nInvalid floor! Please enter 1-10.\n"
 .globl main
 
 main:
-    lw $t9, emergency_flag
-    beq $t9, 1, emergency_active
-    
-    # Display menu
     li $v0, 4
-    la $a0, menu_prompt
+    la $a0, floor_prompt
     syscall
     
     li $v0, 1
     lw $a0, current_floor
     syscall
+
+    j menu
+menu:
+    # Display menu
     
     li $v0, 4
     la $a0, menu_options
@@ -44,15 +44,19 @@ main:
     # Process menu choice
     beq $t0, 1, request_floor
     beq $t0, 2, process_requests
-    beq $t0, 3, emergency_stop
+    beq $t0, 3, set_emergency
     beq $t0, 4, reset_emergency
     
     li $v0, 4
     la $a0, invalid_input_message
     syscall
-    j main
+    j menu
 
 request_floor:
+
+    lw $t9, emergency_flag
+    beq $t9, 1, emergency_active
+
     li $v0, 4
     la $a0, enter_floor_prompt
     syscall
@@ -76,21 +80,24 @@ request_floor:
     addi $t2, $t2, 1
     sw $t2, request_count
     
-    j main
+    j menu
 
 queue_full:
     li $v0, 4
     la $a0, queue_full_message
     syscall
-    j main
+    j menu
 
 invalid_floor:
     li $v0, 4
     la $a0, invalid_floor_message
     syscall
-    j main
+    j menu
 
 process_requests:
+    lw $t9, emergency_flag
+    beq $t9, 1, emergency_active
+
     lw $t2, request_count
     beq $t2, 0, main
     
@@ -118,14 +125,14 @@ move_up:
     loop_up:
         addi $t4, $t4, 1
         li $v0, 4
-        la $a0, menu_prompt
+        la $a0, floor_prompt
         syscall
         
         li $v0, 1
         move $a0, $t4
         syscall
         
-        jal delay_4s
+        jal delay
         
         beq $t4, $t0, arrive
         j loop_up
@@ -143,14 +150,14 @@ move_down:
     loop_down:
         subi $t4, $t4, 1
         li $v0, 4
-        la $a0, menu_prompt
+        la $a0, floor_prompt
         syscall
         
         li $v0, 1
         move $a0, $t4
         syscall
         
-        jal delay_4s
+        jal delay
         
         beq $t4, $t0, arrive
         j loop_down
@@ -164,18 +171,21 @@ next_request:
     subi $t2, $t2, 1
     sw $t2, request_count
     bgtz $t2, process_loop
-    j main
+    j menu
 
-emergency_stop:
+set_emergency:
     lw $t9, emergency_flag
     bne $t9, 0, main    # Already in emergency mode
     
     li $t9, 1
     sw $t9, emergency_flag
+
+
     li $v0, 4
     la $a0, emergency_message
     syscall
-    j main
+
+    j menu
 
 reset_emergency:
     lw $t9, emergency_flag
@@ -185,22 +195,22 @@ reset_emergency:
     sw $t9, emergency_flag
     sw $zero, request_count
     li $v0, 4
-    la $a0, menu_prompt
+    la $a0, floor_prompt
     syscall
     
     li $v0, 1
     lw $a0, current_floor
     syscall
-    j main
+    j menu
 
 emergency_active:
     li $v0, 4
     la $a0, emergency_active_message
     syscall
-    j main
+    j menu
 
-delay_4s:
-    li $t5, 4000000
+delay:
+    li $t5, 8000000
 delay_loop:
     addi $t5, $t5, -1
     bnez $t5, delay_loop

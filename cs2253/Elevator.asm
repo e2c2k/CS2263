@@ -1,8 +1,8 @@
 .data
+current_floor: .word 1
 prompt: .asciiz "\nEnter a floor number: "
 elevatorFloor: .asciiz "\nElevator is on floor: " #$s0
-personFloor: .asciiz "\nYou're on floor " #$s1
-menuChoice: .asciiz "\n0. Call Emergency\n1. Call Elevator\n2. Run Elevator \n3. Reset Elevator\n4. Exit\n"
+menu_options: .asciiz "\n1: Request Floor\n2: Run Elevator\n3: Emergency Stop\n4: Reset\nChoice: "
 differentFloor: .asciiz "\nError: Elevator and person are on different floors\nCall the elevator first\n"
 wrongChoice: .asciiz "\nError: Invalid choice\n"
 outOfBounds: .asciiz "\nError: Invalid floor selection. Choose between 1 and 5.\n"
@@ -14,14 +14,11 @@ resetMSG: .asciiz "\nElevator has been reset to floor 1.\n"
 .text
 main:
 
-    li $s0, 1 # elevator starts on floor 1
-    li $s1, 1 # person starts on floor 1
-    li $s2, 0 # elevator is not in emergency mode
 
 
     j menu
 
-Offmenu:
+menu:
     # print the elevators floor
     li $v0, 4
     la $a0, elevatorFloor 
@@ -42,7 +39,7 @@ Offmenu:
 
     # prints the menu for what to do next
     li $v0, 4
-    la $a0, menuChoice 
+    la $a0, menu_options 
     syscall
 
     li $v0, 5
@@ -63,7 +60,7 @@ Offmenu:
     la $a0, wrongChoice 
     syscall
 
-    j Offmenu
+    j menu
 
 setEmergency:
     # set the elevator to emergency mode
@@ -75,7 +72,7 @@ setEmergency:
     syscall
 
     # return to menu
-    j Offmenu
+    j menu
 
 reset:
     # reset the elevator to floor 1
@@ -87,7 +84,7 @@ reset:
     syscall
 
     li $v0, 1
-    move $a0, $s0
+    move $a0, current_floor
     syscall
 
     #clear requests
@@ -96,7 +93,7 @@ reset:
     li $t2, 0        
 
     # return to menu
-    j Offmenu
+    j menu
 
 
 
@@ -177,14 +174,14 @@ movePersonAndElevatorToFloor:
     j movingDown
     move $s1, $v0
 
-    j Offmenu
+    j menu
 
 error:
     li $v0, 4
     la $a0, differentFloor
     syscall
 
-    j Offmenu
+    j menu
 
 invalid_floor:
     li $v0, 4
