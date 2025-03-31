@@ -4,11 +4,11 @@ CC = gcc
 # Compiler flags
 CFLAGS = -Wall -g
 
-# Source files (add all .c files here)
-SRC = main.c Board.c Move.c txtFiles.c
+# Source file (just main.c)
+SRC = main.c
 
-# Object files (these will be generated from the .c files)
-OBJ = $(SRC:.c=.o)
+# Object files for the necessary .c files (board, move, txtFiles)
+OBJ = board.o move.o txtFiles.o
 
 # Executable name
 EXEC = main
@@ -17,12 +17,18 @@ EXEC = main
 all: $(EXEC)
 
 # Rule to create the executable from the object files
-$(EXEC): $(OBJ)
-	$(CC) $(OBJ) -o $(EXEC)
+$(EXEC): $(SRC) $(OBJ)
+	$(CC) $(SRC) $(OBJ) -o $(EXEC)
 
 # Rule to compile .c files into .o files
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+board.o: board.c
+	$(CC) $(CFLAGS) -c board.c -o board.o
+
+move.o: move.c
+	$(CC) $(CFLAGS) -c move.c -o move.o
+
+txtFiles.o: txtFiles.c
+	$(CC) $(CFLAGS) -c txtFiles.c -o txtFiles.o
 
 # Clean up object files and the executable
 clean:
