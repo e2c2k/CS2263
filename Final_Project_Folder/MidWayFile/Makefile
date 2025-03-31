@@ -5,7 +5,7 @@ CC = gcc
 CFLAGS = -Wall -g
 
 # Source files (add all .c files here)
-SRC = main.c board.c move.c txtFiles.c
+SRC = main.c Board.c Move.c txtFiles.c
 
 # Object files (these will be generated from the .c files)
 OBJ = $(SRC:.c=.o)
