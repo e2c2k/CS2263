@@ -11,7 +11,7 @@ SRC = main.c board.c Move.c txtFiles.c
 OBJ = $(SRC:.c=.o)
 
 # Executable name
-EXEC = checkers
+EXEC = main
 
 # Default target: compile and link everything
 all: $(EXEC)
