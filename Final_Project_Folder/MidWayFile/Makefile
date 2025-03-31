@@ -1,26 +1,18 @@
-# Compiler to use
 CC = gcc
 
-# Compiler flags
 CFLAGS = -Wall -g
 
-# Source file (just main.c)
 SRC = main.c
 
-# Object files for the necessary .c files (board, move, txtFiles)
-OBJ = board.o move.o txtFiles.o
+OBJ = Board.o Move.o txtFiles.o
 
-# Executable name
 EXEC = main
 
-# Default target: compile and link everything
 all: $(EXEC)
 
-# Rule to create the executable from the object files
 $(EXEC): $(SRC) $(OBJ)
 	$(CC) $(SRC) $(OBJ) -o $(EXEC)
 
-# Rule to compile .c files into .o files
 board.o: board.c
 	$(CC) $(CFLAGS) -c board.c -o board.o
 
