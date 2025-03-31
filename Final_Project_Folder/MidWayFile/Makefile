@@ -1,31 +1,29 @@
 CC = gcc
-
 CFLAGS = -Wall -g
+OBJFILES = main.o board.o move.o txtFiles.o
+TARGET = main
 
-SRC = main.c
+# Rule to build the target executable
+$(TARGET): $(OBJFILES)
+	$(CC) $(OBJFILES) -o $(TARGET)
 
-OBJ = Board.o Move.o txtFiles.o
+# Rule to compile main.o
+main.o: main.c board.h move.h txtFiles.h
+	$(CC) $(CFLAGS) -c main.c
 
-EXEC = main
+# Rule to compile board.o
+board.o: board.c board.h
+	$(CC) $(CFLAGS) -c board.c
 
-all: $(EXEC)
+# Rule to compile move.o
+move.o: move.c move.h board.h
+	$(CC) $(CFLAGS) -c move.c
 
-$(EXEC): $(SRC) $(OBJ)
-	$(CC) $(SRC) $(OBJ) -o $(EXEC)
+# Rule to compile txtFiles.o
+txtFiles.o: txtFiles.c txtFiles.h
+	$(CC) $(CFLAGS) -c txtFiles.c
 
-board.o: board.c
-	$(CC) $(CFLAGS) -c board.c -o board.o
-
-move.o: move.c
-	$(CC) $(CFLAGS) -c move.c -o move.o
-
-txtFiles.o: txtFiles.c
-	$(CC) $(CFLAGS) -c txtFiles.c -o txtFiles.o
-
-# Clean up object files and the executable
+# Clean up object files and target
 clean:
-	rm -f $(OBJ) $(EXEC)
+	rm -f $(OBJFILES) $(TARGET)
 
-# Run the program (optional)
-run: $(EXEC)
-	./$(EXEC)

@@ -1,4 +1,4 @@
-#include "Board.h"
+#include "board.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -86,7 +86,11 @@ void printBoard(Board *board) {
     }
 }
 void freeBoard(Board *board){
-    //free(board->tiles);
+    if (board == NULL) return;
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        free(board->tiles[i]);
+    }
+    free(board->tiles);
     free(board);
     printf("Board Free'd\n");
 }

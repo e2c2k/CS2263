@@ -1,7 +1,9 @@
- #include "Board.c"
+ #include "board.h"
+ #include "move.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
 //sr to move row down is + 1, move up is -1
 //sc to move column right is +1, move left is -1
 bool jump(char **board, int sr, int sc, int *xCounter, int *oCounter, char player, int movement) { //movement: 1; upRight. 2; downRight. 3; upLeft. 4; downLeft
