@@ -24,7 +24,8 @@ int main(int argc, char * argv[]){
 		else if(curr == '\n'){
 			dnp = 1;
 		}
-		else if(insideTag == 0 && dnp == 0){
+		
+		if(insideTag == 1 && dnp == 1){
 			printf("%c", curr);
 		}
 		if(dnp == 1){
