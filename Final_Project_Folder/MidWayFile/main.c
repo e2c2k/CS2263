@@ -105,6 +105,7 @@ int main(int argc, char ** argv[]){
                                     printf("2. Down Right\n");
                                     printf("3. Up Left\n");
                                     printf("4. Down Left\n");
+				    printf("5. Exit game\n");
                                     printf("Your choice: ");
                                     scanf(" %d", &pChoice);
                                     switch(pChoice){
@@ -123,6 +124,11 @@ int main(int argc, char ** argv[]){
                                         case 4:
                                                 valid = DownLeft(board->tiles, sr, sc, &xCounter, &oCounter, player);
                                         break;
+					
+					case 5:
+                                                playing = false; //ends current game
+                                            	valid = true;
+					break;
                                         
                                         default:
                                             printf("Invalid choice.\n");
