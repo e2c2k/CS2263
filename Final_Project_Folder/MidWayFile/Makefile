@@ -1,21 +1,34 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -std=c11
 
-SRCS = main.c Move.c txtFiles.c
-OBJS = $(SRCS:.c=.o)
+CC = gcc
+
+# Compiler flags
+CFLAGS = -Wall -g
+
+# Source files
+SRC = main.c board.c Move.c txtFiles.c
+
+# Object files
+OBJ = $(SRC:.c=.o)
+
+# Executable name
 EXEC = checkers
 
+# Default target: compile and link everything
 all: $(EXEC)
 
-$(EXEC): $(OBJS)
-	$(CC) $(CFLAGS) -o $(EXEC) $(OBJS)
+# Rule to create the executable
+$(EXEC): $(OBJ)
+	$(CC) $(OBJ) -o $(EXEC)
 
+# Rule to compile .c files into .o files
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-test: $(EXEC)
-	@echo "Running tests..."
-	./$(EXEC) < test_input.txt > test_output.txt
-
+# Clean up the object files and the executable
 clean:
-	rm -f $(OBJS) $(EXEC) test_output.txt
+	rm -f $(OBJ) $(EXEC)
+
+# Run tests (if you have any test cases, add them here)
+test:
+	./$(EXEC)
+
