@@ -5,7 +5,7 @@
 #include "move.h"
 #include "txtFiles.h"
 #define BOARD_SIZE 8
-int main(int argc, char ** argv[]){
+int main(){
     int choice;
     printf("Welcome to Checkers!\n");
 
@@ -30,11 +30,10 @@ int main(int argc, char ** argv[]){
                 int sc;
                 int pChoice;
                 char player = 'x';
-                int move = 0;
                 bool valid = false;
                 bool isValidMove;
                 while(playing){
-                    printBoard(board);
+                    printBoard(board->tiles);
                     printf("Current Score:\nPlayer 1: %d Pieces captured\nPlayer 2: %d Pieces captured\n", 12 - oCounter, 12 - xCounter);
                     if(xCounter == 0){
                         printf(" O's win!\n");
@@ -47,8 +46,9 @@ int main(int argc, char ** argv[]){
                         playing = false;
                     }
                     else{
-                        printf("player %c make your turn.\n", player);
+                        
                         while(!valid){
+                        	printf("player %c Select your source position:\n", player);
                         	isValidMove = false;
                         	while(!isValidMove){
 		                    printf("Select the row of the piece to move: ");
@@ -64,13 +64,23 @@ int main(int argc, char ** argv[]){
 		                    	printf("invalid position on the board\n");
 		                    }
 		                }
-                            if(board->tiles[sr][sc] == player && (board->tiles[sr][sc] == 'x' || board->tiles[sr][sc] == 'o')){
-                                printf("\nMovement choices:\n");
-                                printf("1. Diagonal right\n");
-                                printf("2. Diagonal left\n");
-                                printf("3. Exit game\n");                            
-                                printf("Your choice: ");
-                                scanf(" %d", &pChoice);
+                            if(board->tiles[sr][sc] == player){
+                            	if(player == 'x'){
+		                        printf("\nMovement choices:\n");
+		                        printf("1. up right\n");
+		                        printf("2. up left\n");
+		                        printf("3. Exit game\n");                            
+		                        printf("Your choice: ");
+		                        scanf(" %d", &pChoice);
+		                 }
+		                 else{
+		                 	printf("\nMovement choices:\n");
+		                        printf("1. down right\n");
+		                        printf("2. down left\n");
+		                        printf("3. Exit game\n");                            
+		                        printf("Your choice: ");
+		                        scanf(" %d", &pChoice);
+		                  }
                                 switch(pChoice){
                                     case 1:
                                         if(board->tiles[sr][sc] == 'x'){
@@ -99,7 +109,7 @@ int main(int argc, char ** argv[]){
                                         break;
                                     }
                                 }
-                                else if(board->tiles[sr][sc] == (player -32) && (board->tiles[sr][sc] == 'X' || board->tiles[sr][sc] == 'O')){
+                                else if(board->tiles[sr][sc] == (player -32)){
                                     printf("\nMovement choices:\n");
                                     printf("1. Up Right\n");
                                     printf("2. Down Right\n");
