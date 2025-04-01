@@ -39,8 +39,7 @@ bool jump(char **board, int sr, int sc, int *xCounter, int *oCounter, char playe
         }
         // Ensure the landing spot is within the board and is empty
         if (new_r >= 0 && new_r < BOARD_SIZE && new_c >= 0 && new_c < BOARD_SIZE &&
-            board[new_r][new_r] == ' ') {
-            printf("Jump reached\n");
+            board[new_r][new_c] == ' ') {
             return true; // Valid jump
         }
     }
@@ -52,11 +51,9 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
   if ((sr - 1 >= 0) && (sc + 1 < BOARD_SIZE)) {
         int next_r = sr - 1; // Move row up
         int next_c = sc + 1; // Move left
-        printf("Movement P1\n");
         if (jump(board, next_r, next_c, xCounter, oCounter, player, 1) == true) {
             int landing_r = next_r - 1; // Landing position
             int landing_c = next_c + 1;
-            printf("Movement P2\n");
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
             	if(board[sr][sc] == player){
             		if(landing_r == 0){
@@ -76,7 +73,6 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
 			}
 		}
 		else{
-			printf("Movement Crown\n");
 			char crown = player - 32;
 			board[landing_r][landing_c] = crown; // Move player to new position
 			board[next_r][next_c] = ' ';  // Remove jumped-over piece
@@ -85,7 +81,6 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
                 // Decrease opponent's counter
                 if (player == 'o') (*xCounter)--;
                 else (*oCounter)--;
-                printf("Movement done\n");
                 return true; // Successfully jumped
             }
         }
@@ -113,10 +108,7 @@ bool UpRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char pl
      }
     }
     printf("invalid move\n");
-    Board *temp = createBoard();
-    temp ->tiles = board;
-    printBoard(temp);
-    freeBoard(temp);
+    printBoard(board);
     return false; // No valid move
 }
 //Moves piece up and left 
@@ -124,11 +116,9 @@ bool UpLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char pla
     if ((sr - 1 >= 0) && (sc - 1 >= 0)) {
         int next_r = sr - 1; // Move row up
         int next_c = sc - 1; // Move left
-        printf("Movement P1\n");
         if (jump(board, next_r, next_c, xCounter, oCounter, player, 3) == true) {
             int landing_r = next_r - 1; // Landing position
             int landing_c = next_c - 1;
-            printf("Movement P2\n");
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
                 if(board[sr][sc] == player){
             		if(landing_r == 0){
@@ -156,7 +146,6 @@ bool UpLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char pla
                 // Decrease opponent's counter
                 if (player == 'o') (*xCounter)--;
                 else (*oCounter)--;
-                printf("Movement done\n");
                 return true; // Successfully jumped
             }
         }
@@ -184,10 +173,7 @@ bool UpLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char pla
       }
     }
     printf("invalid move\n");
-    Board *temp = createBoard();
-    temp ->tiles = board;
-    printBoard(temp);
-    freeBoard(temp);
+    printBoard(board);
     return false; // No valid move
 }
 //Moves piece down and right
@@ -196,11 +182,9 @@ bool DownRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char 
  if ((sr + 1 < BOARD_SIZE) && (sc + 1 < BOARD_SIZE)) {
         int next_r = sr + 1; // Move row down
         int next_c = sc + 1; // Move right
-        printf("Movement P1\n");
         if (jump(board, next_r, next_c, xCounter, oCounter, player, 2) == true) {
             int landing_r = next_r + 1; // Landing position
             int landing_c = next_c + 1;
-            printf("Movement P2\n");
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
                 if(board[sr][sc] == player){
             		if(landing_r == 0){
@@ -229,7 +213,6 @@ bool DownRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char 
                 // Decrease opponent's counter
                 if (player == 'o') (*xCounter)--;
                 else (*oCounter)--;
-                printf("Movement done\n");
                 return true; // Successfully jumped
             }
         }
@@ -257,10 +240,7 @@ bool DownRight(char **board, int sr, int sc, int *xCounter, int *oCounter, char 
       }
     }
     printf("invalid move\n");
-    Board *temp = createBoard();
-    temp ->tiles = board;
-    printBoard(temp);
-    freeBoard(temp);
+    printBoard(board);
     return false; // No valid move
 }
 
@@ -270,11 +250,9 @@ bool DownLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char p
     if ((sr + 1 < BOARD_SIZE) && (sc - 1 >= 0)) {
         int next_r = sr + 1; // Move row down
         int next_c = sc - 1; // Move left
-        printf("Movement P1\n");
         if (jump(board, next_r, next_c, xCounter, oCounter, player, 4)  == true) {
             int landing_r = next_r + 1; // Landing position
             int landing_c = next_c - 1;
-            printf("Movement P2\n");
             if (landing_r >= 0 && landing_c >= 0 && board[landing_r][landing_c] == ' ') {
                 if(board[sr][sc] == player){
             		if(landing_r == 0){
@@ -303,7 +281,6 @@ bool DownLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char p
                 // Decrease opponent's counter
                 if (player == 'o') (*xCounter)--;
                 else (*oCounter)--;
-                printf("Movement done\n");
                 return true; // Successfully jumped
             }
         }
@@ -331,9 +308,6 @@ bool DownLeft(char **board, int sr, int sc, int *xCounter, int *oCounter, char p
       }
     }
     printf("invalid move\n");
-    Board *temp = createBoard();
-    temp ->tiles = board;
-    printBoard(temp);
-    freeBoard(temp);
+    printBoard(board);
     return false; // No valid move
 }
