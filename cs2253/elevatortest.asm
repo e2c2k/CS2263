@@ -1,9 +1,9 @@
 .data
 floors: .word 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-current_floor: .word 1
-requests: .space 40    # Space for 10 floor requests cause 10 floors
-request_count: .word 0  # Number of pending requests
-emergency_flag: .word 0 # 0 = normal, 1 = emergency mode
+current_floor: .word 1 #preset to floor 1
+requests: .space 40    # 10 floor requests because 10 floors
+request_count: .word 0  # number of requests
+emergency_flag: .word 0 # 0 for normal 1 for emergency
 floor_prompt: .asciiz "\nCurrent floor: "
 menu_options: .asciiz "\n1: Request Floor\n2: Run Elevator\n3: Emergency Stop\n4: Reset\nChoice: "
 enter_floor_prompt: .asciiz "\nEnter floor (1-10): "
