@@ -51,7 +51,7 @@ void initializeBoard(Board *board){
     printf("Board Initialized\n");
 }
 
-void printBoard(Board *board) {
+void printBoard(char **board) {
     printf("\n    ");  
     for (int i = 0; i < BOARD_SIZE; i++) {
         printf("%d   ", i); // Column numbers
@@ -65,14 +65,14 @@ void printBoard(Board *board) {
             
             // Get piece character with color
             char *piece;
-            if (board->tiles[i][j] == 'x') {
+            if (board[i][j] == 'x') {
                 piece = WHITE_REG_PIECE;  // Player X regular
-            } else if (board->tiles[i][j] == 'o') {
+            } else if (board[i][j] == 'o') {
                 piece = RED_REG_PIECE;  // Player O regular
-                } else if (board->tiles[i][j] == 'X') {
+                } else if (board[i][j] == 'X') {
                 piece = WHITE_CROWN_PIECE;  // Player x Crowned
                }
-                else if (board->tiles[i][j] == 'O') {
+                else if (board[i][j] == 'O') {
                piece = RED_CROWN_PIECE;  // Player O Crowned
                }
             else {
