@@ -1,194 +1,217 @@
 .data
-current_floor: .word 1
-prompt: .asciiz "\nEnter a floor number: "
-elevatorFloor: .asciiz "\nElevator is on floor: " #$s0
+floors: .word 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+current_floor: .word 1 #preset to floor 1
+requests: .space 40    # 10 floor requests because 10 floors
+request_count: .word 0  # number of requests
+emergency_flag: .word 0 # 0 for normal 1 for emergency
+floor_prompt: .asciiz "\nCurrent floor: "
 menu_options: .asciiz "\n1: Request Floor\n2: Run Elevator\n3: Emergency Stop\n4: Reset\nChoice: "
-differentFloor: .asciiz "\nError: Elevator and person are on different floors\nCall the elevator first\n"
-wrongChoice: .asciiz "\nError: Invalid choice\n"
-outOfBounds: .asciiz "\nError: Invalid floor selection. Choose between 1 and 5.\n"
-onFloor: .asciiz "\nCurrenty on floor: "
-requests: .space 20 #creating the array in memory
-requestFloorMSG: .asciiz "\nEnter the floor number to call the elevator to: "
-emergencyMSG: .asciiz "\nEmergency mode activated. Elevator is not in service.\n"
-resetMSG: .asciiz "\nElevator has been reset to floor 1.\n"
+enter_floor_prompt: .asciiz "\nEnter floor (1-10): "
+direction_message: .asciiz "\nMoving "
+up_message: .asciiz "UP\n"
+down_message: .asciiz "DOWN\n"
+emergency_message: .asciiz "\nEmergency Stop Activated!\n"
+queue_full_message: .asciiz "\nRequest queue full!\n"
+emergency_active_message: .asciiz "\nElevator in emergency mode. Reset required (4).\n"
+invalid_input_message: .asciiz "\nInvalid input!\n"
+invalid_floor_message: .asciiz "\nInvalid floor! Please enter 1-10.\n"
+
 .text
+.globl main
+
 main:
-
-
+    li $v0, 4
+    la $a0, floor_prompt
+    syscall
+    
+    li $v0, 1
+    lw $a0, current_floor
+    syscall
 
     j menu
-
 menu:
-    # print the elevators floor
+    # Display menu
+    
     li $v0, 4
-    la $a0, elevatorFloor 
+    la $a0, menu_options
     syscall
-
-    li $v0, 1
-    move $a0, $s0
-    syscall
-
-    # print the persons floor
-    li $v0, 4
-    la $a0, personFloor 
-    syscall 
-
-    li $v0, 1
-    move $a0, $s1
-    syscall
-
-    # prints the menu for what to do next
-    li $v0, 4
-    la $a0, menu_options 
-    syscall
-
+    
+    # Get menu choice
     li $v0, 5
     syscall
-
     move $t0, $v0
-
-    #branches to whatever is chosen in the menu
-    beq $t0, 0, setEmergency
-    beq $t0, 1, callElevatorToFloor
-    beq $t0, 2, movePersonAndElevatorToFloor 
-    beq $t0, 3, reset
-    beq $t0, 4, exit
-
-    # if any value other than whats showed on menu is entered 
-    # this will be printed and the menu will be called again
+    
+    # Process menu choice
+    beq $t0, 1, request_floor
+    beq $t0, 2, process_requests
+    beq $t0, 3, set_emergency
+    beq $t0, 4, reset_emergency
+    
     li $v0, 4
-    la $a0, wrongChoice 
+    la $a0, invalid_input_message
     syscall
-
     j menu
 
-setEmergency:
-    # set the elevator to emergency mode
-    li $s2, 1
+request_floor:
 
-    # print the emergency message
+    lw $t9, emergency_flag
+    beq $t9, 1, emergency_active
+
     li $v0, 4
-    la $a0, emergencyMSG 
+    la $a0, enter_floor_prompt
     syscall
-
-    # return to menu
-    j menu
-
-reset:
-    # reset the elevator to floor 1
-    li $s0, 1
-
-    # print the reset message
-    li $v0, 4
-    la $a0, resetMSG 
-    syscall
-
-    li $v0, 1
-    move $a0, current_floor
-    syscall
-
-    #clear requests
-    la $t0, requests
-    li $t1, 20
-    li $t2, 0        
-
-    # return to menu
-    j menu
-
-
-
-requestElevator:
-    #Eneter floor to call the elevator to 
-    li $v0, 4
-    la $a0, prompt
-    syscall
-
+    
     li $v0, 5
     syscall
-    # check if call is in floor range (1-5)
-    blt $v0, 1, invalid_floor
-    bgt $v0, 5, invalid_floor
-
-    la $t0, requests
-    sub $t1, $v0, 1        
-    sll $t1, $t1, 2         
-    add $t0, $t0, $t1
-    li $t1, 1
-    sw $t1, 0($t0)
-
-
+    move $t0, $v0
     
-movingUp:
-    addi $s0, $s0, 1
-    li $a0, 1000
-    jal delay
-    li $v0, 4
-    la $a0, onFloor
-    syscall
-    li $v0, 1
-    move $a0, $s0
-    syscall
-    bgt $t1, $s0, movingUp
-    j movingDown
+    # Validate floor (1-10)
+    blt $t0, 1, invalid_floor
+    bgt $t0, 10, invalid_floor
     
-movingDown:
-    beq $t1, $s0, menu
-    addi $s0, $s0, -1
-    li $a0, 1000
-    jal delay
-    li $v0, 4
-    la $a0, onFloor
-    syscall
-    li $v0, 1
-    move $a0, $s0
-    syscall
-    j movingDown
+    # Add to queue
+    lw $t2, request_count
+    bge $t2, 10, queue_full
     
-    #delay
-
-delay:
-li $v0, 32
-syscall
-jr $ra
-
-movePersonAndElevatorToFloor:
-    # if person and elevator are on different floors
-    # this will be printed and the menu will be called again
-    bne $s0, $s1, error
-
-    li $v0, 4
-    la $a0, prompt
-    syscall
-
-    li $v0, 5
-    syscall
-
-# check if call is in floor range (1-5)
-    blt $v0, 1, invalid_floor
-    bgt $v0, 5, invalid_floor
-
-    # moves the person and elevator to the same floor
-    move $t1, $v0
-    move $s1, $v0
-    bgt $t1, $s0, movingUp
-    j movingDown
-    move $s1, $v0
-
+    la $t3, requests
+    sll $t4, $t2, 2
+    add $t3, $t3, $t4
+    sw $t0, 0($t3)
+    addi $t2, $t2, 1
+    sw $t2, request_count
+    
     j menu
 
-error:
+queue_full:
     li $v0, 4
-    la $a0, differentFloor
+    la $a0, queue_full_message
     syscall
-
     j menu
 
 invalid_floor:
     li $v0, 4
-    la $a0, outOfBounds
+    la $a0, invalid_floor_message
     syscall
-    j Offmenu
+    j menu
 
-exit:
-    li $v0, 10
+process_requests:
+    lw $t9, emergency_flag
+    beq $t9, 1, emergency_active
+
+    lw $t2, request_count
+    beq $t2, 0, main
+    
+    la $t3, requests
+    lw $t1, current_floor
+    
+process_loop:
+    lw $t0, 0($t3)
+    
+    beq $t0, $t1, next_request
+    
+    bgt $t0, $t1, move_up
+    blt $t0, $t1, move_down
+
+move_up:
+    li $v0, 4
+    la $a0, direction_message
     syscall
+    
+    la $a0, up_message
+    syscall
+    
+    move $t4, $t1
+    
+    loop_up:
+        addi $t4, $t4, 1
+        li $v0, 4
+        la $a0, floor_prompt
+        syscall
+        
+        li $v0, 1
+        move $a0, $t4
+        syscall
+        
+        jal delay
+        
+        beq $t4, $t0, arrive
+        j loop_up
+
+move_down:
+    li $v0, 4
+    la $a0, direction_message
+    syscall
+    
+    la $a0, down_message
+    syscall
+    
+    move $t4, $t1
+    
+    loop_down:
+        subi $t4, $t4, 1
+        li $v0, 4
+        la $a0, floor_prompt
+        syscall
+        
+        li $v0, 1
+        move $a0, $t4
+        syscall
+        
+        jal delay
+        
+        beq $t4, $t0, arrive
+        j loop_down
+
+arrive:
+    sw $t0, current_floor
+    move $t1, $t0
+
+next_request:
+    addi $t3, $t3, 4
+    subi $t2, $t2, 1
+    sw $t2, request_count
+    bgtz $t2, process_loop
+    j menu
+
+set_emergency:
+    lw $t9, emergency_flag
+    bne $t9, 0, main    # Already in emergency mode
+    
+    li $t9, 1
+    sw $t9, emergency_flag
+
+
+    li $v0, 4
+    la $a0, emergency_message
+    syscall
+
+    j menu
+
+reset_emergency:
+    lw $t9, emergency_flag
+    beq $t9, 0, main    # No emergency to reset
+    
+    li $t9, 0
+    sw $t9, emergency_flag
+    sw $zero, request_count
+    li $v0, 4
+    la $a0, floor_prompt
+    syscall
+    
+    li $v0, 1
+    lw $a0, current_floor
+    syscall
+    j menu
+
+emergency_active:
+    li $v0, 4
+    la $a0, emergency_active_message
+    syscall
+    j menu
+
+delay:
+    li $t5, 8000000
+delay_loop:
+    addi $t5, $t5, -1
+    bnez $t5, delay_loop
+    jr $ra
