@@ -1,4 +1,4 @@
-#include "board.h"
+#include "Board.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -51,7 +51,7 @@ void initializeBoard(Board *board){
     printf("Board Initialized\n");
 }
 
-void printBoard(char **board) {
+void printBoard(Board *board) {
     printf("\n    ");  
     for (int i = 0; i < BOARD_SIZE; i++) {
         printf("%d   ", i); // Column numbers
@@ -65,14 +65,14 @@ void printBoard(char **board) {
             
             // Get piece character with color
             char *piece;
-            if (board[i][j] == 'x') {
+            if (board->tiles[i][j] == 'x') {
                 piece = WHITE_REG_PIECE;  // Player X regular
-            } else if (board[i][j] == 'o') {
+            } else if (board->tiles[i][j] == 'o') {
                 piece = RED_REG_PIECE;  // Player O regular
-                } else if (board[i][j] == 'X') {
+                } else if (board->tiles[i][j] == 'X') {
                 piece = WHITE_CROWN_PIECE;  // Player x Crowned
                }
-                else if (board[i][j] == 'O') {
+                else if (board->tiles[i][j] == 'O') {
                piece = RED_CROWN_PIECE;  // Player O Crowned
                }
             else {
@@ -86,11 +86,7 @@ void printBoard(char **board) {
     }
 }
 void freeBoard(Board *board){
-    if (board == NULL) return;
-    for (int i = 0; i < BOARD_SIZE; i++) {
-        free(board->tiles[i]);
-    }
-    free(board->tiles);
+    //free(board->tiles);
     free(board);
     printf("Board Free'd\n");
 }
