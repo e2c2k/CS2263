@@ -175,7 +175,7 @@ next_request:
 
 set_emergency:
     lw $t9, emergency_flag
-    bne $t9, 0, main    # Already in emergency mode
+    bne $t9, 0, main    # already in emergency mode
     
     li $t9, 1
     sw $t9, emergency_flag
@@ -210,7 +210,7 @@ emergency_active:
     j menu
 
 delay:
-    li $t5, 8000000
+    li $t5, 8000000  #delay for ~8 seconds
 delay_loop:
     addi $t5, $t5, -1
     bnez $t5, delay_loop
