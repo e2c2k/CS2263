@@ -1,11 +1,11 @@
 .data
 floors: .word 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-current_floor: .word 1 #preset to floor 1
-requests: .space 40    # 10 floor requests because 10 floors
-request_count: .word 0  # number of requests
-emergency_flag: .word 0 # 0 for normal 1 for emergency
+current_floor: .word 1            # preset to floor 1
+requests: .space 40               # 10 floor requests (10 * 4 bytes = 40 bytes)
+request_count: .word 0            # number of requests
+emergency_flag: .word 0           # 0 for normal, 1 for emergency
 floor_prompt: .asciiz "\nCurrent floor: "
-menu_options: .asciiz "\n1: Request Floor\n2: Run Elevator\n3: Emergency Stop\n4: Reset\nChoice: "
+menu_options: .asciiz "\n1: Request Floor\n2: Run Elevator\n3: Emergency Stop\n4: Reset\n5: Exit\nChoice: "
 enter_floor_prompt: .asciiz "\nEnter floor (1-10): "
 direction_message: .asciiz "\nMoving "
 up_message: .asciiz "UP\n"
@@ -20,6 +20,7 @@ invalid_floor_message: .asciiz "\nInvalid floor! Please enter 1-10.\n"
 .globl main
 
 main:
+    # Display current floor
     li $v0, 4
     la $a0, floor_prompt
     syscall
@@ -29,9 +30,9 @@ main:
     syscall
 
     j menu
+
 menu:
     # Display menu
-    
     li $v0, 4
     la $a0, menu_options
     syscall
@@ -46,15 +47,16 @@ menu:
     beq $t0, 2, process_requests
     beq $t0, 3, set_emergency
     beq $t0, 4, reset_emergency
+    beq $t0, 5, exit_program
     
+    # Invalid input
     li $v0, 4
     la $a0, invalid_input_message
     syscall
     j menu
 
 request_floor:
-
-    lw $t9, emergency_flag
+    lw $t9, emergency_flag #loads 0 or 1
     beq $t9, 1, emergency_active
 
     li $v0, 4
@@ -69,16 +71,16 @@ request_floor:
     blt $t0, 1, invalid_floor
     bgt $t0, 10, invalid_floor
     
-    # Add to queue
+    # Add to request queue
     lw $t2, request_count
-    bge $t2, 10, queue_full
+    bge $t2, 5, queue_full #queue of size 5
     
-    la $t3, requests
+    la $t3, requests #loading start of the queue array
     sll $t4, $t2, 2
     add $t3, $t3, $t4
-    sw $t0, 0($t3)
-    addi $t2, $t2, 1
-    sw $t2, request_count
+    sw $t0, 0($t3) #storing floor number to requests array
+    addi $t2, $t2, 1 #add 1 to the count
+    sw $t2, request_count #store the current count
     
     j menu
 
@@ -95,91 +97,108 @@ invalid_floor:
     j menu
 
 process_requests:
-    lw $t9, emergency_flag
+    lw $t9, emergency_flag #check 1 or 0
     beq $t9, 1, emergency_active
 
     lw $t2, request_count
-    beq $t2, 0, main
+    beq $t2, 0, menu  # No requests, return to menu
     
     la $t3, requests
-    lw $t1, current_floor
+    lw $t1, current_floor  # Load current floor
+
+    # Process requests sequentially
+    li $t5, 0  # Direction flag (1 for up, -1 for down)
     
 process_loop:
-    lw $t0, 0($t3)
-    
-    beq $t0, $t1, next_request
-    
+    lw $t0, 0($t3)         # Load next request
+    beqz $t0, done_processing # Exit loop if no more requests
+    addi $t3, $t3, 4       # Move to the next request in queue
+
+    # If the request is greater than current floor, go up
     bgt $t0, $t1, move_up
-    blt $t0, $t1, move_down
-
-move_up:
+    # If the request is less than current floor, go down
+   move_down:
+    # Print Moving DOWN message
     li $v0, 4
     la $a0, direction_message
     syscall
-    
-    la $a0, up_message
-    syscall
-    
-    move $t4, $t1
-    
-    loop_up:
-        addi $t4, $t4, 1
-        li $v0, 4
-        la $a0, floor_prompt
-        syscall
-        
-        li $v0, 1
-        move $a0, $t4
-        syscall
-        
-        jal delay
-        
-        beq $t4, $t0, arrive
-        j loop_up
-
-move_down:
-    li $v0, 4
-    la $a0, direction_message
-    syscall
-    
     la $a0, down_message
     syscall
-    
-    move $t4, $t1
-    
+
+    # Move down floor by floor
     loop_down:
-        subi $t4, $t4, 1
+        subi $t1, $t1, 1        # Go to the previous floor
         li $v0, 4
         la $a0, floor_prompt
         syscall
-        
         li $v0, 1
-        move $a0, $t4
+        move $a0, $t1
         syscall
-        
+        # Delay for effect
         jal delay
-        
-        beq $t4, $t0, arrive
+        # Check if we've reached the requested floor
+        beq $t1, $t0, next_request  # Stop if reached requested floor
         j loop_down
+    j process_loop
 
-arrive:
-    sw $t0, current_floor
-    move $t1, $t0
+move_up:
+    # Print Moving UP message
+    li $v0, 4
+    la $a0, direction_message
+    syscall
+    la $a0, up_message
+    syscall
+
+    # Move up floor by floor
+    loop_up:
+        addi $t1, $t1, 1        # Go to the next floor
+        li $v0, 4
+        la $a0, floor_prompt
+        syscall
+        li $v0, 1
+        move $a0, $t1
+        syscall
+        # Delay for effect
+        jal delay
+        # Check if we've reached the requested floor
+        beq $t1, $t0, next_request  # Stop if reached requested floor
+        j loop_up
+
+
 
 next_request:
+    # Update current floor to the last requested floor
+    sw $t1, current_floor
+
+    # Check if there's another request
+    lw $t0, 0($t3)
+    bnez $t0, process_loop  # Continue with next request if available
+
+done_processing:
+    # All requests processed, return to menu
+    li $v0, 4
+
+
+    # Clear request queue after processing
+    sw $zero, request_count  # Reset request count
+    la $t3, requests
+    li $t2, 0
+clear_requests:
+    sw $zero, 0($t3)       # Clear request data
     addi $t3, $t3, 4
-    subi $t2, $t2, 1
-    sw $t2, request_count
-    bgtz $t2, process_loop
+    addi $t2, $t2, 1
+    bge $t2, 10, clear_done
+    j clear_requests
+clear_done:
+
     j menu
 
 set_emergency:
     lw $t9, emergency_flag
-    bne $t9, 0, main    # already in emergency mode
+    bne $t9, 0, menu    # Already in emergency mode
     
     li $t9, 1
     sw $t9, emergency_flag
-
 
     li $v0, 4
     la $a0, emergency_message
@@ -189,7 +208,7 @@ set_emergency:
 
 reset_emergency:
     lw $t9, emergency_flag
-    beq $t9, 0, main    # No emergency to reset
+    beq $t9, 0, menu    # No emergency to reset
     
     li $t9, 0
     sw $t9, emergency_flag
@@ -209,9 +228,13 @@ emergency_active:
     syscall
     j menu
 
+exit_program:
+    li $v0, 10     # Exit system (exit the program)
+    syscall
+
 delay:
-    li $t5, 8000000  #delay for ~8 seconds
+    li $t5, 4000000 #running at about 40 instructions/second gives 4 second delay
 delay_loop:
-    addi $t5, $t5, -1
+    addi $t5, $t5, -1 #decrement until 0, overloading with instructions.
     bnez $t5, delay_loop
     jr $ra
